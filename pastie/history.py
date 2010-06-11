@@ -1,10 +1,27 @@
 #!/usr/bin/env python
 # coding=utf8
 
+#    pastie - a simple clipboard manager
+#    Copyright (C) 2010  Felipe Morales <hel.sheep@gmail.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import gtk
 import gtk.gdk
 import textwrap
 
+# class representing history items.
 class HistoryMenuItem():
 	def __init__(self, item, protector):
 		self.payload = item
@@ -28,20 +45,24 @@ class HistoryMenuItem():
 		except:
 			return content
 
+	# set payload as current clipboard content.
 	def set_as_current(self, event):
 		self.collector.select(self)
 		self.protector.update_menu()
 		self.protector.clipboard.set_text(self.payload)
 
+# class representin the history items collection.
 class HistoryCollector():
-	def __init__(self, maxlen=25):
+	def __init__(self, maxlen=25): #change maxlen to tweak history size
 		self.iter_count = -1
 		self.maxlen = maxlen
 		self.data = []
 
+	# load data. used when reading history from file.
 	def set_payload(self, payload):
 		self.data = payload
 
+	# returns the number of members of collection
 	def __len__(self):
 		count = 0
 		for i in self:
@@ -59,6 +80,7 @@ class HistoryCollector():
 		else:
 			return self.data[self.iter_count]
 
+	# print a representation of the data. for debug purposes only.
 	def repr(self):
 		count = 0
 		for i in self:
@@ -74,12 +96,14 @@ class HistoryCollector():
 					print i
 			count =+ 1
 
+	# check if item exists in collection by content comparison.
 	def exists(self,data):
 		for item in self:
 			if item.payload == data.payload:
 				return True
 		return False
-
+	
+	# returns position of existing item.
 	def existing_index(self, data):
 		count = 0
 		for item in self:
@@ -88,30 +112,33 @@ class HistoryCollector():
 			count =+ 1
 		return -1
 
+	# adds a member to the collection
 	def add(self,data):
-		# si no existe ya en el historial
+		# if it doesn't exist in the collection
 		if not self.exists(data):
-			# si no tenemos contenidos ...
+			# if we have no history
 			if len(self.data) == 0:
-				# simplemente añadimos los datos
+				# we simply add the new data
 				self.data.append(data)
-			# si ya tenemos contenidos ...
+			# if we have history data
 			else:
-				# cogemos los datos que queremos preservar
+				# we grab the data we want to preserve
 				tail = self.data[0:self.maxlen - 1]
-				# limpiamos la lista
+				# clean the collection
 				self.data = []
-				# añadimos los datos nuevos
+				# add the new data
 				self.data.append(data)
-				# añadimos los datos que queríamos preservar
+				# reappend the data we preserved before
 				for item in tail:
 					self.data.append(item)
-		# si ya existen los datos, los seleccionamos
+		# if it does exist in collection
 		else:
 			found_at = self.existing_index(data)
 			if found_at != -1:
+				# we just select it
 				self.select(self.data[found_at])
 
+	# set some item as the current member of the selection (top)
 	def select(self, data):
 		idx = self.data.index(data)
 		selected_data = self.data[idx]
@@ -124,10 +151,12 @@ class HistoryCollector():
 			self.data.append(item)
 		for item in tail:
 			self.data.append(item)
-
+	
+	# clear the history
 	def empty(self):
 		self.data = []
 
+# wrapper that adds menuitems to a menu
 class HistoryMenuItemCollector(HistoryCollector):
 	def add_items_to_menu(self, menu):
 		count = 0
