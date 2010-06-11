@@ -42,6 +42,7 @@ class ClipboardProtector():
 		self.history = history.HistoryMenuItemCollector()
 		# load history if existent
 		self.history.set_payload(self.recover_history())
+		
 		# show the menu
 		self.update_menu()
 		

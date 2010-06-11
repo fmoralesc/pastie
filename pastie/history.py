@@ -27,23 +27,15 @@ class HistoryMenuItem():
 		self.payload = item
 		self.protector = protector
 		self.collector = protector.history
-		self.normal = self.repr(self.payload)
-		self.selected = self.decorate(self.repr(self.payload))
-	
-	def repr(self, content, length=50):
+		
+	def repr(self, length=50):
 		try:
-			if len(content) <= length:
-				return content.strip()
+			if len(self.payload) <= length:
+				return self.payload.strip()
 			else:
-				return textwrap.wrap(content, length - 3)[0] + "..."
+				return textwrap.wrap(self.payload, length - 3)[0] + "..."
 		except:
 			return ""
-
-	def decorate(self, content):
-		try:
-			return "<b>" + content + "</b>"
-		except:
-			return content
 
 	# set payload as current clipboard content.
 	def set_as_current(self, event):
@@ -84,16 +76,7 @@ class HistoryCollector():
 	def repr(self):
 		count = 0
 		for i in self:
-			if count == 0:
-				try:
-					print i.selected
-				except:
-					print i
-			else:
-				try:
-					print i.normal
-				except:
-					print i
+			print i
 			count =+ 1
 
 	# check if item exists in collection by content comparison.
@@ -161,11 +144,7 @@ class HistoryMenuItemCollector(HistoryCollector):
 	def add_items_to_menu(self, menu):
 		count = 0
 		for i in self:
-			if count == 0:
-				item = gtk.MenuItem(i.selected)
-				item.get_child().set_use_markup(True)
-			else:
-				item = gtk.MenuItem(i.normal)
+			item = gtk.MenuItem(i.repr())
 			item.connect("activate", i.set_as_current)
 			menu.append(item)
 			count =+ 1
