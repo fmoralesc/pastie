@@ -16,8 +16,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import signal
-import atexit
 import gettext
 import gtk
 import appindicator
@@ -34,9 +32,5 @@ if __name__ == "__main__":
 
 	# create clipboard protector (this is the core of the program)
 	clipboard_protector = protector.ClipboardProtector(indicator)
-
-	# save the history on program termination
-	signal.signal(signal.SIGTERM, clipboard_protector.save_history)
-	atexit.register(clipboard_protector.save_history)
 
 	gtk.main()

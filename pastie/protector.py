@@ -91,6 +91,7 @@ class ClipboardProtector():
 					self.clipboard_text = clipboard_temp
 					self.history.add(history.HistoryMenuItem(clipboard_temp, self))
 					self.update_menu()
+					self.save_history()
 		return True # so timeout continues.
 
 	# create and show the menu
