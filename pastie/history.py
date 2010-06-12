@@ -42,6 +42,7 @@ class HistoryMenuItem():
 		self.collector.select(self)
 		self.protector.update_menu()
 		self.protector.clipboard.set_text(self.payload)
+		self.protector.clipboard.store()
 
 # class representin the history items collection.
 class HistoryCollector():

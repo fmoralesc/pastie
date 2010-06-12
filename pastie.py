@@ -16,13 +16,36 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
+import getopt
 import gettext
 import gtk
 import appindicator
 
 import pastie.protector as protector
+import pastie.cli as cli
 
 if __name__ == "__main__":
+	# if the argument "-p" is passed, print the current clipboard contents, and exit
+	try:
+		opts, args = getopt.getopt(sys.argv[1:], 'p')
+	except:
+		sys.exit(2)
+	for o, a in opts:
+		if o == "-p":
+			cli.print_current()
+			sys.exit()
+		else:
+			assert False, "unhandled option"
+	
+	# if we pipe the output of another program to pastie, it sets it as the current clipboard
+	if not sys.stdin.isatty():
+		text = sys.stdin.read()
+		if text not in ("", None):
+			cli.add_to_history(text)
+			sys.stdout.write(text)
+			sys.exit()
+
 	# load translations
 	gettext.install("pastie", "/usr/share/locale")
 	

@@ -86,6 +86,7 @@ class ClipboardProtector():
 			targets = self.clipboard.wait_for_targets()
 			if not targets:
 				self.clipboard.set_text(self.clipboard_text)
+				self.clipboard.store()
 		else:
 			if clipboard_temp != self.clipboard_text:
 				if clipboard_temp != "":
