@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf8
 
-#    pastie - a simple clipboard manager
+#    This file is part of pastie - a simple clipboard manager
 #    Copyright (C) 2010  Felipe Morales <hel.sheep@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -38,7 +38,7 @@ class HistoryMenuItem():
 			return ""
 
 	# set payload as current clipboard content.
-	def set_as_current(self, event):
+	def set_as_current(self, event=None):
 		self.collector.select(self)
 		self.protector.update_menu()
 		self.protector.clipboard.set_text(self.payload)
@@ -72,6 +72,9 @@ class HistoryCollector():
 			raise StopIteration
 		else:
 			return self.data[self.iter_count]
+
+	def __getitem__(self, index):
+		return self.data[index]
 
 	# print a representation of the data. for debug purposes only.
 	def repr(self):

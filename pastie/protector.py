@@ -1,4 +1,4 @@
-#    pastie - a simple clipboard manager
+#    This file is part of pastie - a simple clipboard manager
 #    Copyright (C) 2010  Felipe Morales <hel.sheep@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -42,7 +42,12 @@ class ClipboardProtector():
 		self.history = history.HistoryMenuItemCollector()
 		# load history if existent
 		self.history.set_payload(self.recover_history())
-		
+		# pastie might have been loaded after some contents were added to the X clipboard.
+		# we check if ther's any.
+		self.check()
+		# select the first item in the history.
+		self.history[0].set_as_current()
+
 		# show the menu
 		self.update_menu()
 		

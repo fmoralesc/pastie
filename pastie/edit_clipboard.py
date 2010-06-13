@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#    pastie - a simple clipboard manager
+#    This file is part of pastie - a simple clipboard manager
 #    Copyright (C) 2010  Felipe Morales <hel.sheep@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify

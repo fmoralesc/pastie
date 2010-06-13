@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from py2deb import Py2deb
 
-version = "0.3"
+version = "0.3.1"
 
 p = Py2deb("pastie")
 p.author = "Felipe Morales"
