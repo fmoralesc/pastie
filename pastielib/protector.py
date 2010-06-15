@@ -22,11 +22,11 @@ import xml.etree.ElementTree as tree
 import hashlib
 
 try:
-	import pastie.history as history
+	import pastielib.history as history
 except:
 	import history
 try:
-	import pastie.edit_clipboard as edit
+	import pastielib.edit_clipboard as edit
 except:
 	import edit_clipboard as edit
 

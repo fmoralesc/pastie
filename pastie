@@ -22,8 +22,8 @@ import gettext
 import gtk
 import appindicator
 
-import pastie.protector as protector
-import pastie.cli as cli
+import pastielib.protector as protector
+import pastielib.cli as cli
 
 if __name__ == "__main__":
 	# if the argument "-p" is passed, print the current clipboard contents, and exit
