@@ -46,7 +46,8 @@ class ClipboardProtector():
 		# we check if ther's any.
 		self.check()
 		# select the first item in the history.
-		self.history[0].set_as_current()
+		if len(self.history) > 0:
+			self.history[0].set_as_current()
 
 		# show the menu
 		self.update_menu()
