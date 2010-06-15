@@ -9,10 +9,10 @@ setup(
 	author_email = "hel.sheep@gmail.com",
 	url = "http://github.com/fmoralesc/pastie/",
 	license = "GNU GPL v3",
-	version = "0.3.1",
+	version = "0.3.3",
 	scripts = ["pastie"],
 	data_files=[
 		('/usr/share/applications', ['pastie.desktop']),
 		('/usr/share/locale/es/LC_MESSAGES', ['po/es/pastie.mo'])
 		],
-	packages = ["pastielib"]
+	packages = ["pastielib"])
