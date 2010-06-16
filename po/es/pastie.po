@@ -1,11 +1,11 @@
-# Spanish translations for PACKAGE package.
-# Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for pastie package.
+# Copyright (C) 2010 Felipe Morales
+# This file is distributed under the same license as the pastie package.
 # Felipe Morales <hel.sheep@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-10 17:44-0400\n"
 "PO-Revision-Date: 2010-06-10 17:44-0400\n"
