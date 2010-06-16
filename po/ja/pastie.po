@@ -1,28 +1,29 @@
 # Japanese translations for pastie package.
-# Copyright (C) 2010 Felipe Morales
-# This file is distributed under the same license as the pastie package
+# Copyright (C) 2010 Felipe Morales 
+# This file is distributed under the same license as the pastie package.
 # Marisol Barrios <marisol.barrios@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 17:44-0400\n"
-"PO-Revision-Date: 2010-06-15 23:16-0400\n"
+"POT-Creation-Date: 2010-06-16 16:58-0400\n"
+"PO-Revision-Date: 2010-06-16 17:21-0400\n"
 "Last-Translator: Marisol Barrios <marisol.barrios@gmail.com>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../pastie/edit_clipboard.py:29
+#: ../pastielib/edit_clipboard.py:29
 msgid "Editing clipboard"
 msgstr "クリップボード編集中"
 
-#: ../pastie/protector.py:115
+#: ../pastielib/protector.py:115
 msgid "Edit clipboard"
 msgstr "クリップボード編集"
 
-#: ../pastie/protector.py:119
+#: ../pastielib/protector.py:119
 msgid "Clean history"
 msgstr "履歴消去"
