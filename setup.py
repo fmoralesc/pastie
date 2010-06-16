@@ -15,6 +15,7 @@ setup(
 		('/usr/share/applications', ['pastie.desktop']),
 		('/etc/xdg/autostart', ['pastie-startup.desktop']),
 		('/usr/share/locale/es/LC_MESSAGES', ['po/es/pastie.mo']),
-		('/usr/share/locales/ja/LC_MESSAGES', ['po/ja/pastie.mo'])
+		('/usr/share/locales/ja/LC_MESSAGES', ['po/ja/pastie.mo']),
+		('/usr/share/locale/ru/LC_MESSAGES', ['po/ru/pastie.mo']),
 		],
 	packages = ["pastielib"])
