@@ -19,6 +19,7 @@ import gtk
 import gtk.gdk
 import os.path
 import xml.etree.ElementTree as tree
+from xml.parsers.expat import ExpatError
 import hashlib
 
 try:
@@ -60,7 +61,9 @@ class ClipboardProtector():
 		tmp_list = []
 		try:
 			history_tree = tree.parse(os.path.expanduser(input_file))
-		except IOError:
+		except IOError: # file doesn't exist
+			return tmp_list
+		except ExpatError: # file is empty or malformed
 			return tmp_list
 		for item in history_tree.findall("item"):
 			history_item = history.HistoryMenuItem(item.text, self)
