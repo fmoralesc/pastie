@@ -1,2 +1,2 @@
-../pastie/edit_clipboard.py
-../pastie/protector.py
+../pastielib/edit_clipboard.py
+../pastielib/protector.py
