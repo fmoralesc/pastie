@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-10 17:44-0400\n"
+"POT-Creation-Date: 2010-06-16 16:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,22 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../pastie/edit_clipboard.py:8
+#: ../pastielib/edit_clipboard.py:29
 msgid "Editing clipboard"
 msgstr ""
 
-#: ../pastie/edit_clipboard.py:27
-msgid "Cancel"
-msgstr ""
-
-#: ../pastie/edit_clipboard.py:28
-msgid "Accept"
-msgstr ""
-
-#: ../pastie/protector.py:75
+#: ../pastielib/protector.py:115
 msgid "Edit clipboard"
 msgstr ""
 
-#: ../pastie/protector.py:79
+#: ../pastielib/protector.py:119
 msgid "Clean history"
 msgstr ""

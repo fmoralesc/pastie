@@ -16,22 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../pastie/edit_clipboard.py:8
+#: ../pastielib/edit_clipboard.py:29
 msgid "Editing clipboard"
 msgstr "Editando el portapapeles"
 
-#: ../pastie/edit_clipboard.py:27
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: ../pastie/edit_clipboard.py:28
-msgid "Accept"
-msgstr "Aceptar"
-
-#: ../pastie/protector.py:75
+#: ../pastielib/protector.py:115
 msgid "Edit clipboard"
 msgstr "Editar el portapapeles"
 
-#: ../pastie/protector.py:79
+#: ../pastielib/protector.py:119
 msgid "Clean history"
 msgstr "Borrar el historial"

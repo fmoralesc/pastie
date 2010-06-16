@@ -15,22 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../pastie/edit_clipboard.py:8
+#: ../pastie/edit_clipboard.py:29
 msgid "Editing clipboard"
 msgstr "クリップボード編集中"
 
-#: ../pastie/edit_clipboard.py:27
-msgid "Cancel"
-msgstr "キャンセル"
-
-#: ../pastie/edit_clipboard.py:28
-msgid "Accept"
-msgstr "オッケー"
-
-#: ../pastie/protector.py:75
+#: ../pastie/protector.py:115
 msgid "Edit clipboard"
 msgstr "クリップボード編集"
 
-#: ../pastie/protector.py:79
+#: ../pastie/protector.py:119
 msgid "Clean history"
 msgstr "履歴消去"

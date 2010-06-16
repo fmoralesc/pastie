@@ -12,23 +12,15 @@ msgstr ""
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 
-#: ../pastie/edit_clipboard.py:8
+#: ../pastie/edit_clipboard.py:29
 msgid "Editing clipboard"
 msgstr "Редактирование буфера обмена"
 
-#: ../pastie/edit_clipboard.py:27
-msgid "Cancel"
-msgstr "Отменить"
-
-#: ../pastie/edit_clipboard.py:28
-msgid "Accept"
-msgstr "Принять"
-
-#: ../pastie/protector.py:75
+#: ../pastie/protector.py:115
 msgid "Edit clipboard"
 msgstr "Редактировать буфер обмена"
 
-#: ../pastie/protector.py:79
+#: ../pastie/protector.py:119
 msgid "Clean history"
 msgstr "Очистить историю"
 
