@@ -19,19 +19,23 @@
 
 import gtk
 import gtk.gdk
+import gettext
+_ = gettext.gettext
 
 class ClipboardEditorDialog():
 	def __init__(self):
 		self.clipboard = gtk.clipboard_get()
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
 		self.window.set_title(_("Editing clipboard"))
-		self.window.set_resizable(False)
+		self.window.set_resizable(True)
 		self.window.set_skip_pager_hint(True)
 		self.window.set_skip_taskbar_hint(True)
+		self.window.set_size_request(500, 300)
+		self.window.set_position(gtk.WIN_POS_CENTER)
+		self.window.set_border_width(12)
 
-		table = gtk.Table(10, 9, True)
-		table.set_row_spacings(1)
-		self.window.add(table)
+		vbox = gtk.VBox(spacing=6)
+		self.window.add(vbox)
 		
 		textscroll = gtk.ScrolledWindow()
 		textscroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -41,15 +45,20 @@ class ClipboardEditorDialog():
 		self.textview.get_buffer().set_text(self.clipboard.wait_for_text())
 		textscroll.add(self.textview)
 
-		table.attach(textscroll, 0, 9, 0, 9)
+		vbox.pack_start(textscroll)
 
-		cancel_button = gtk.Button(_("Cancel"))
-		ok_button = gtk.Button(_("Accept"))
-		cancel_button.connect("clicked", self.cancel_action)
-		ok_button.connect("clicked", self.ok_action)
+		def create_button(stock, clicked):
+			button = gtk.Button(stock=stock)
+			button.connect("clicked", clicked)
+			return button
 
-		table.attach(cancel_button, 7, 8, 9, 10)
-		table.attach(ok_button, 8, 9, 9, 10)
+		hbox = gtk.HButtonBox()
+		hbox.set_spacing(12)
+		hbox.set_layout(gtk.BUTTONBOX_END)
+		hbox.add(create_button(gtk.STOCK_CANCEL, self.cancel_action))
+		hbox.add(create_button(gtk.STOCK_OK, self.ok_action))
+		
+		vbox.pack_end(hbox, expand=False)
 		
 		self.window.show_all()
 		self.window.show()
@@ -65,3 +74,4 @@ class ClipboardEditorDialog():
 if __name__ == "__main__":
 	w = ClipboardEditorDialog()
 	gtk.main()
+
