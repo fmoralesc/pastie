@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
 	name = "pastie",
-	decription = "a simple clipboard manager", 
+	description = "a simple clipboard manager", 
 	author = "Felipe Morales",
 	author_email = "hel.sheep@gmail.com",
 	url = "http://github.com/fmoralesc/pastie/",
