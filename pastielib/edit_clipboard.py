@@ -19,8 +19,6 @@
 
 import gtk
 import gtk.gdk
-import gettext
-_ = gettext.gettext
 
 class ClipboardEditorDialog():
 	def __init__(self):
