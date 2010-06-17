@@ -19,7 +19,6 @@
 
 import gtk
 import gtk.gdk
-import textwrap
 
 # class representing history items.
 class HistoryMenuItem():
@@ -29,13 +28,14 @@ class HistoryMenuItem():
 		self.collector = protector.history
 		
 	def repr(self, length=50):
-		try:
-			if len(self.payload) <= length:
-				return self.payload.strip()
-			else:
-				return textwrap.wrap(self.payload, length - 3)[0] + "..."
-		except:
-			return ""
+		l = unicode(self.payload).strip(' ')
+		if len(l) > length:
+			l = l[:length-1] + u'\u2026'
+
+		l = l.replace('\t', u'\u22c5')
+		l = l.replace('\n', u'\u21b2')
+		
+		return l
 
 	# set payload as current clipboard content.
 	def set_as_current(self, event=None):
