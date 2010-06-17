@@ -20,6 +20,7 @@
 import gtk
 import gtk.gdk
 
+
 class ClipboardEditorDialog():
 	def __init__(self):
 		self.clipboard = gtk.clipboard_get()
@@ -30,7 +31,7 @@ class ClipboardEditorDialog():
 		self.window.set_skip_taskbar_hint(True)
 		self.window.set_size_request(500, 300)
 		self.window.set_position(gtk.WIN_POS_CENTER)
-		self.window.set_border_width(12)
+		self.window.set_border_width(6)
 
 		vbox = gtk.VBox(spacing=6)
 		self.window.add(vbox)
@@ -51,7 +52,7 @@ class ClipboardEditorDialog():
 			return button
 
 		hbox = gtk.HButtonBox()
-		hbox.set_spacing(12)
+		hbox.set_spacing(6)
 		hbox.set_layout(gtk.BUTTONBOX_END)
 		hbox.add(create_button(gtk.STOCK_CANCEL, self.cancel_action))
 		hbox.add(create_button(gtk.STOCK_OK, self.ok_action))
