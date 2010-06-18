@@ -21,9 +21,11 @@ import getopt
 import gettext
 import gtk
 import appindicator
+import keybinder
 
 import pastielib.protector as protector
 import pastielib.cli as cli
+import pastielib.preferences as prefs
 
 if __name__ == "__main__":
 	# if the argument "-p" is passed, print the current clipboard contents, and exit
@@ -52,6 +54,9 @@ if __name__ == "__main__":
 	# create indicator
 	indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_APPLICATION_STATUS)
 	indicator.set_status(appindicator.STATUS_ACTIVE)
+
+	# keybind preferences dialog
+	keybinder.bind("<Control><Alt>P", lambda : prefs.PreferencesDialog())
 
 	# create clipboard protector (this is the core of the program)
 	clipboard_protector = protector.ClipboardProtector(indicator)

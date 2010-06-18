@@ -1,0 +1,40 @@
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/apps/pastie/prefs/history_size</key>
+      <applyto>/apps/pastie/prefs/history_size</applyto>
+      <owner>pastie</owner>
+      <type>int</type>
+      <default>25</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Set history size</short>
+        <long>Set history size.</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/pastie/prefs/item_length</key>
+      <applyto>/apps/pastie/prefs/item_length</applyto>
+      <owner>pastie</owner>
+      <type>int</type>
+      <default>50</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Set items length</short>
+        <long>Set menu items length.</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/pastie/prefs/show_quit_on_menu</key>
+      <applyto>/apps/pastie/prefs/show_quit_on_menu</applyto>
+      <owner>pastie</owner>
+      <type>bool</type>
+      <default>false</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Show "quit" menu item</short>
+        <long>Show "quit" menu item.</long>
+      </locale>
+    </schema>
+  </schemalist>
+</gconfschemafile>

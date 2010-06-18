@@ -27,7 +27,8 @@ class HistoryMenuItem():
 		self.protector = protector
 		self.collector = protector.history
 		
-	def repr(self, length=50):
+	def repr(self):
+		length = self.protector.gconf_client.get_item_length()
 		l = unicode(self.payload).strip(' ')
 		if len(l) > length:
 			l = l[:length-1] + u'\u2026'
@@ -48,8 +49,8 @@ class HistoryMenuItem():
 class HistoryCollector():
 	def __init__(self, maxlen=25): #change maxlen to tweak history size
 		self.iter_count = -1
-		self.maxlen = maxlen
 		self.data = []
+		self.maxlen = maxlen
 
 	# load data. used when reading history from file.
 	def set_payload(self, payload):
@@ -145,6 +146,16 @@ class HistoryCollector():
 
 # wrapper that adds menuitems to a menu
 class HistoryMenuItemCollector(HistoryCollector):
+	def __init__(self, protector):
+		HistoryCollector.__init__(self)
+		self.protector = protector
+		self.maxlen = self.protector.gconf_client.get_history_size()
+
+	def adjust_maxlen(self, gconf=None, key=None, value=None, d=None):
+		self.maxlen = self.protector.gconf_client.get_history_size()
+		self.data = self.data[:self.maxlen]
+		self.protector.update_menu()
+
 	def add_items_to_menu(self, menu):
 		count = 0
 		for i in self:

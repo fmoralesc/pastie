@@ -22,17 +22,15 @@ import xml.etree.ElementTree as tree
 from xml.parsers.expat import ExpatError
 import hashlib
 
-try:
-	import pastielib.history as history
-except:
-	import history
-try:
-	import pastielib.edit_clipboard as edit
-except:
-	import edit_clipboard as edit
+import pastielib.history as history
+import pastielib.edit_clipboard as edit
+import pastielib.preferences as prefs
 
 class ClipboardProtector():
 	def __init__(self, indicator):
+		# set the gconf_client
+		self.gconf_client = prefs.PrefsGConfClient()
+		
 		# get the clipboard gdk atom
 		self.clipboard = gtk.clipboard_get(gtk.gdk.SELECTION_CLIPBOARD)
 
@@ -40,7 +38,7 @@ class ClipboardProtector():
 		self.clipboard_text = ""
 
 		# create the history data strucure
-		self.history = history.HistoryMenuItemCollector()
+		self.history = history.HistoryMenuItemCollector(self)
 		# load history if existent
 		self.history.set_payload(self.recover_history())
 		# pastie might have been loaded after some contents were added to the X clipboard.
@@ -53,6 +51,11 @@ class ClipboardProtector():
 		# show the menu
 		self.update_menu()
 		
+		# register gconf preferences changes  callback functions
+		self.gconf_client.notify_add('show_quit_on_menu', self.update_menu)
+		self.gconf_client.notify_add('item_length', self.update_menu)
+		self.gconf_client.notify_add('history_size', self.history.adjust_maxlen)
+
 		# register the timeout that checks the clipboard contents
 		gobject.timeout_add(500, self.check)
 
@@ -106,12 +109,11 @@ class ClipboardProtector():
 		return True # so timeout continues.
 
 	# create and show the menu
-	def update_menu(self):
+	def update_menu(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
 		menu = gtk.Menu()
 		if len(self.history) > 0:
 			self.history.add_items_to_menu(menu)
-			separator = gtk.SeparatorMenuItem()
-			menu.append(separator)
+			menu.append(gtk.SeparatorMenuItem())
 		edit_clipboard_menu = gtk.MenuItem(_("Edit clipboard"))
 		edit_clipboard_menu.connect("activate", lambda w: edit.ClipboardEditorDialog())
 		menu.append(edit_clipboard_menu)
@@ -119,6 +121,11 @@ class ClipboardProtector():
 			clean_menu = gtk.MenuItem(_("Clean history"))
 			clean_menu.connect("activate", self.clean_history)
 			menu.append(clean_menu)
+		if self.gconf_client.get_show_quit() == True:
+			menu.append(gtk.SeparatorMenuItem())
+			quit_menu = gtk.MenuItem(_("Quit"))
+			quit_menu.connect("activate", lambda q: gtk.main_quit())
+			menu.append(quit_menu)
 		menu.show_all()
 		# attach this menu to the indicator
 		self.indicator.set_menu(menu)
