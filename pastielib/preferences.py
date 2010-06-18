@@ -35,11 +35,11 @@ class PreferencesDialog:
 	def __init__(self):
 		self.gconf_client = PrefsGConfClient()
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-		self.window.set_title("Pastie Preferences")
+		self.window.set_title(_("Pastie preferences"))
 		self.window.set_resizable(False)
 		self.window.set_skip_pager_hint(True)
 		self.window.set_skip_taskbar_hint(True)
-		self.window.set_size_request(250, 130)
+		self.window.set_size_request(300, 130)
 		self.window.set_position(gtk.WIN_POS_CENTER)
 		self.window.set_border_width(12)
 
@@ -50,7 +50,7 @@ class PreferencesDialog:
 
 		hist_size_pref_box = gtk.HBox()
 		hist_size_pref_align = gtk.Alignment(xalign=0.0, yalign=0.5)
-		hist_size_pref_label = gtk.Label("History size")
+		hist_size_pref_label = gtk.Label(_("History size"))
 		hist_size_pref_align.add(hist_size_pref_label)
 		hist_size_pref_box.pack_start(hist_size_pref_align)
 				
@@ -63,10 +63,10 @@ class PreferencesDialog:
 
 		item_length_pref_box = gtk.HBox()
 		item_length_pref_align = gtk.Alignment(xalign=0.0, yalign=0.5)
-		item_length_pref_label = gtk.Label("Menu history entries lenght")
+		item_length_pref_label = gtk.Label(_("Menu history entries length"))
 		item_length_pref_align.add(item_length_pref_label)
 		item_length_pref_box.pack_start(item_length_pref_align)
-				
+			
 		self.item_length_pref_spin = gtk.SpinButton(gtk.Adjustment(lower=2.0, upper=60.0, step_incr=1.0))
 		self.item_length_pref_spin.set_value(self.gconf_client.get_item_length())
 		self.item_length_pref_spin.connect("value-changed", self.change_item_length)
@@ -74,9 +74,9 @@ class PreferencesDialog:
 
 		prefs_box.pack_start(item_length_pref_box)
 
-		misc_pref_expander = gtk.Expander("Misc")
+		misc_pref_expander = gtk.Expander(_("Misc"))
 
-		show_misc_checkbutton = gtk.CheckButton("Show 'quit' on menu")
+		show_misc_checkbutton = gtk.CheckButton(_("Show 'quit' on menu"))
 		if self.gconf_client.get_show_quit() == True:
 			show_misc_checkbutton.set_active(True)
 		else:

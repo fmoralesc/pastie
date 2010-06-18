@@ -122,7 +122,6 @@ class ClipboardProtector():
 			clean_menu.connect("activate", self.clean_history)
 			menu.append(clean_menu)
 		if self.gconf_client.get_show_quit() == True:
-			menu.append(gtk.SeparatorMenuItem())
 			quit_menu = gtk.MenuItem(_("Quit"))
 			quit_menu.connect("activate", lambda q: gtk.main_quit())
 			menu.append(quit_menu)

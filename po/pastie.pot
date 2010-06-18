@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-16 16:58-0400\n"
+"POT-Creation-Date: 2010-06-18 19:23-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../pastielib/edit_clipboard.py:29
+#: ../pastielib/edit_clipboard.py:28
 msgid "Editing clipboard"
 msgstr ""
 
-#: ../pastielib/protector.py:115
+#: ../pastielib/protector.py:117
 msgid "Edit clipboard"
 msgstr ""
 
-#: ../pastielib/protector.py:119
+#: ../pastielib/protector.py:121
 msgid "Clean history"
+msgstr ""
+
+#: ../pastielib/protector.py:125
+msgid "Quit"
+msgstr ""
+
+#: ../pastielib/preferences.py:38
+msgid "Pastie preferences"
+msgstr ""
+
+#: ../pastielib/preferences.py:53
+msgid "History size"
+msgstr ""
+
+#: ../pastielib/preferences.py:66
+msgid "Menu history entries length"
+msgstr ""
+
+#: ../pastielib/preferences.py:77
+msgid "Misc"
+msgstr ""
+
+#: ../pastielib/preferences.py:79
+msgid "Show 'quit' on menu"
 msgstr ""
