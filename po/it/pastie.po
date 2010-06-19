@@ -1,0 +1,53 @@
+# Italian translations for Pastie package.
+# Copyright (C) 2010 Luca Marra
+# This file is distributed under the same license as the Pastie package.
+# Luca Marra <luca@facciocose.it>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pastie\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-18 18:59-0400\n"
+"PO-Revision-Date: 2010-06-19 19:12+0200\n"
+"Last-Translator: Luca Marra <luca@facciocose.it>\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../pastielib/edit_clipboard.py:28
+msgid "Editing clipboard"
+msgstr "Modifica appunti"
+
+#: ../pastielib/protector.py:117
+msgid "Edit clipboard"
+msgstr "Modifica appunti"
+
+#: ../pastielib/protector.py:121
+msgid "Clean history"
+msgstr "Cancella cronologia"
+
+#: ../pastielib/protector.py:126
+msgid "Quit"
+msgstr "Esci"
+
+#: ../pastielib/preferences.py:38
+msgid "Pastie preferences"
+msgstr "Preferenze di Pastie"
+
+#: ../pastielib/preferences.py:53
+msgid "History size"
+msgstr "Dimensione cronologia"
+
+#: ../pastielib/preferences.py:66
+msgid "Menu history entries length"
+msgstr "Lunghezza elementi del menu"
+
+#: ../pastielib/preferences.py:77
+msgid "Misc"
+msgstr "Altro"
+
+#: ../pastielib/preferences.py:79
+msgid "Show 'quit' on menu"
+msgstr "Mostra 'Esci' nel menu"
