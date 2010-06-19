@@ -39,7 +39,6 @@ class PreferencesDialog:
 		self.window.set_resizable(False)
 		self.window.set_skip_pager_hint(True)
 		self.window.set_skip_taskbar_hint(True)
-		self.window.set_size_request(300, 130)
 		self.window.set_position(gtk.WIN_POS_CENTER)
 		self.window.set_border_width(12)
 
@@ -47,6 +46,9 @@ class PreferencesDialog:
 		self.window.add(vbox)
 
 		prefs_box = gtk.VBox()
+
+		main_prefs_box = gtk.VBox()
+		main_prefs_box.set_size_request(300, 70)
 
 		hist_size_pref_box = gtk.HBox()
 		hist_size_pref_align = gtk.Alignment(xalign=0.0, yalign=0.5)
@@ -59,7 +61,7 @@ class PreferencesDialog:
 		self.hist_size_pref_spin.connect("value-changed", self.change_history_size)
 		hist_size_pref_box.pack_end(self.hist_size_pref_spin, expand=False)
 		
-		prefs_box.pack_start(hist_size_pref_box)
+		main_prefs_box.pack_start(hist_size_pref_box)
 
 		item_length_pref_box = gtk.HBox()
 		item_length_pref_align = gtk.Alignment(xalign=0.0, yalign=0.5)
@@ -72,7 +74,9 @@ class PreferencesDialog:
 		self.item_length_pref_spin.connect("value-changed", self.change_item_length)
 		item_length_pref_box.pack_end(self.item_length_pref_spin, expand=False)
 
-		prefs_box.pack_start(item_length_pref_box)
+		main_prefs_box.pack_start(item_length_pref_box)
+
+		prefs_box.pack_start(main_prefs_box)
 
 		misc_pref_expander = gtk.Expander(_("Misc"))
 
