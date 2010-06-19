@@ -1,5 +1,5 @@
 # Italian translations for Pastie package.
-# Copyright (C) 2010 Luca Marra
+# Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Luca Marra <luca@facciocose.it>, 2010.
 #
