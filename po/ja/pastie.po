@@ -30,25 +30,25 @@ msgstr "履歴消去"
 
 #: ../pastielib/protector.py:125
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 #: ../pastielib/preferences.py:38
 msgid "Pastie preferences"
-msgstr ""
+msgstr "選択"
 
 #: ../pastielib/preferences.py:53
 msgid "History size"
-msgstr ""
+msgstr "歴史サイズ"
 
 #: ../pastielib/preferences.py:66
 msgid "Menu history entries length"
-msgstr ""
+msgstr "エントリ長さ"
 
 #: ../pastielib/preferences.py:77
 msgid "Misc"
-msgstr ""
+msgstr "その他"
 
 #: ../pastielib/preferences.py:79
 msgid "Show 'quit' on menu"
-msgstr ""
+msgstr "メニューで「終了」を示す"
 
