@@ -93,7 +93,7 @@ class ClipboardProtector():
 	# the procedure was taken from parcellite code.
 	def check(self):
 		clipboard_text_available = self.clipboard.wait_is_text_available()
-		if not clipboard_text_available and self.clipboard_text not in ("", None):
+		if not clipboard_text_available and self.clipboard_text != None:
 			targets = self.clipboard.wait_for_targets()
 			if not targets:
 				self.clipboard.set_text(self.clipboard_text)
