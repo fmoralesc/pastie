@@ -35,6 +35,7 @@ class ClipboardProtector():
 		self.clipboard = gtk.clipboard_get(gtk.gdk.SELECTION_CLIPBOARD)
 
 		self.indicator = indicator
+		self.clipboard_text = ""
 
 		# create the history data strucure
 		self.history = history.HistoryMenuItemCollector(self)
@@ -85,21 +86,23 @@ class ClipboardProtector():
 	# erase the clipboard history. the current contents of the clipoard will remain.
 	def clean_history(self, event=None):
 		self.history.empty()
+		self.clipboard_text = ""
 		self.update_menu()
 	
 	# check clipboard contents.
 	# the procedure was taken from parcellite code.
 	def check(self):
 		clipboard_text_available = self.clipboard.wait_is_text_available()
-		if not clipboard_text_available and len(self.history) >= 1:
+		if not clipboard_text_available and self.clipboard_text not in ("", None):
 			targets = self.clipboard.wait_for_targets()
 			if not targets:
-				self.clipboard.set_text(self.history[0])
+				self.clipboard.set_text(self.clipboard_text)
 				self.clipboard.store()
 		else:
 			clipboard_temp = self.clipboard.wait_for_text()
-			if clipboard_temp != self.history[0]:
+			if clipboard_temp != self.clipboard_text:
 				if clipboard_temp != "":
+					self.clipboard_text = clipboard_temp
 					self.history.add(history.HistoryMenuItem(clipboard_temp, self))
 					self.update_menu()
 					self.save_history()
