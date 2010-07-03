@@ -42,7 +42,7 @@ class HistoryMenuItem():
 class TextHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
 		length = self.protector.gconf_client.get_item_length()
-		l = unicode(self.payload[:length + length]).strip(' ')
+		l = unicode(self.payload[:length+length]).strip(' ')
 		if len(l) > length:
 			l = l[:length-1] + u'\u2026'
 
@@ -59,20 +59,19 @@ class TextHistoryMenuItem(HistoryMenuItem):
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
-		lines = self.payload.split("\n")
 		length = self.protector.gconf_client.get_item_length()
-		files_with_comma = unicode(self.payload[:length + length]).strip((' ', '\t'))
+		lines = self.payload.split("\n")
+		files_with_comma = unicode(",".join(lines)[:length+length])
 		if len(files_with_comma) > length:
 			files_with_comma = files_with_comma[:length-1] + u'\u2026'
-		if lines == 1:
+		if len(lines) == 1:
 			l = "[file: " + files_with_comma + "]"
 		else:
-			files_with_comma = files_with_comma.replace('\n', ', ')
-			l = "[" + lines + "files: " + files_with_comma + "]"
+			l = "[" + str(len(lines)) + " files: " + files_with_comma + "]"
 		return l
 
 	def set_as_current(self, event=None):
-		def path_get(clipboard, selectiondata, info, path) :
+		def path_get(clipboard, selectiondata, info, path):
 			selectiondata.set_text(path)
 			files = path.split("\n")
 			file_paths = []
@@ -95,13 +94,19 @@ class FileHistoryMenuItem(HistoryMenuItem):
 
 # class representing image items
 class ImageHistoryMenuItem(HistoryMenuItem):
+	def __init__(self, item, protector):
+		self.pixbuf = item
+		self.payload = self.pixbuf.get_pixels()
+		self.protector = protector
+		self.collector = protector.history
+	
 	def get_label(self):
-		l = "[pix: " + self.payload.props.width + u"\u2715" + self.payload.props.height + "]"
+		l = "[image: " + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
 		return l
 
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
-		self.protector.clipboard.set_image(self.payload)
+		self.protector.clipboard.set_image(self.pixbuf)
 		self.protector.clipboard.store()
 
 # class representin the history items collection.
@@ -134,8 +139,11 @@ class HistoryCollector(object):
 			return self.data[self.iter_count]
 
 	def __getitem__(self, index):
-		return self.data[index]
-
+		try:
+			return self.data[index]
+		except:
+			return False
+		
 	# print a representation of the data. for debug purposes only.
 	def repr(self):
 		count = 0
@@ -218,7 +226,8 @@ class HistoryMenuItemCollector(HistoryCollector):
 	def add_items_to_menu(self, menu):
 		count = 0
 		for i in self:
-			item = gtk.MenuItem(i.get_label())
+			label = i.get_label()
+			item = gtk.MenuItem(label)
 			item.connect("activate", i.set_as_current)
 			menu.append(item)
 			count =+ 1

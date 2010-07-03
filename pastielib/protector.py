@@ -20,6 +20,7 @@ import gtk.gdk
 import os.path
 import xml.etree.ElementTree as tree
 from xml.parsers.expat import ExpatError
+import base64
 import hashlib
 
 import pastielib.history as history
@@ -36,6 +37,7 @@ class ClipboardProtector(object):
 
 		self.indicator = indicator
 		self.clipboard_text = ""
+		self.clipboard_image = None
 
 		# create the history data strucure
 		self.history = history.HistoryMenuItemCollector(self)
@@ -74,12 +76,13 @@ class ClipboardProtector(object):
 			elif item.get("type") == "file":
 				history_item = history.FileHistoryMenuItem(item.text, self)
 			elif item.get("type") == "image":
-				data = item.text
+				data = base64.b64decode(item.text)
 				has_alpha = bool(item.get("has_alpha"))
 				width = int(item.get("width"))
 				height = int(item.get("height"))
 				rowstride = int(item.get("rowstride"))
-				pixbuf = gtk.pixbuf_new_from_data(data, gtk.gdk.COLORSPACE_RGB, has_alpha, 8, width, height, rowstride)
+				pixbuf = gtk.gdk.pixbuf_new_from_data(data, gtk.gdk.COLORSPACE_RGB, has_alpha, 8,
+					width, height, rowstride)
 				history_item = history.ImageHistoryMenuItem(pixbuf, self)
 			else:
 				history_item = history.TextHistoryMenuItem(item.text, self)
@@ -92,25 +95,25 @@ class ClipboardProtector(object):
 		for item in self.history.data:
 			history_tree_item = tree.SubElement(history_tree_root, "item")
 			history_tree_item.set("id", hashlib.md5(item.payload).hexdigest())
-			
-			if isinstance(history_tree_item, history.TextHistoryMenuItem):
+					
+			if isinstance(item, history.TextHistoryMenuItem):
 				item_type = "text"
-			elif isinstance(history_tree_item, history.FileHistoryMenuItem):
+			elif isinstance(item, history.FileHistoryMenuItem):
 				item_type = "file"
-			elif isinstance(history_tree_item, history.ImageHistoryMenuItem):
+			elif isinstance(item, history.ImageHistoryMenuItem):
 				item_type = "image"
 			else:
 				item_type = "text"
 			history_tree_item.set("type", item_type)
-
-			if item_type in ("text", "file"):
+			
+			if item_type == "image":
+				history_tree_item.set("has_alpha", str(item.pixbuf.props.has_alpha))
+				history_tree_item.set("width", str(item.pixbuf.props.width))
+				history_tree_item.set("height", str(item.pixbuf.props.height))
+				history_tree_item.set("rowstride", str(item.pixbuf.props.rowstride))
+				history_tree_item.text = base64.b64encode(item.payload)
+			else:
 				history_tree_item.text = item.payload
-			elif item_type == "image":
-				history_tree_item.set("has_alpha", str(item.payload.props.has_alpha))
-				history_tree.item.set("width", str(item.payload.props.width))
-				history_tree_item.set("height", str(item.payload.props.height))
-				history_tree_item.set("rowstride", str(item.payload.props.rowstride))
-				history_tree_item.text = item.payload.get_pixels()
 
 		history_tree = tree.ElementTree(history_tree_root)
 		history_tree.write(os.path.expanduser(output_file), "UTF-8")
@@ -119,26 +122,40 @@ class ClipboardProtector(object):
 	def clean_history(self, event=None):
 		self.history.empty()
 		self.clipboard_text = ""
+		self.clipboard_image = None
+		self.check()
 		self.update_menu()
 	
 	# check clipboard contents.
-	# the procedure was taken from parcellite code.
 	def check(self):
-		clipboard_text_available = self.clipboard.wait_is_text_available()
-		if not clipboard_text_available and self.clipboard_text != None:
-			targets = self.clipboard.wait_for_targets()
-			if not targets:
-				self.clipboard.set_text(self.clipboard_text)
+		if not self.clipboard.wait_for_targets():
+			if self.clipboard_text != "" or self.clipboard_image != None:
+				if self.clipboard_text != "" : self.clipboard.set_text(self.clipboard_text)
+				if self.clipboard_image != None: self.clipboard.set_image(self.clipboard_image)
 				self.clipboard.store()
-		else:
-			clipboard_temp = self.clipboard.wait_for_text()
-			if clipboard_temp != self.clipboard_text:
-				if clipboard_temp != "":
-					self.clipboard_text = clipboard_temp
-					self.history.add(history.TextHistoryMenuItem(clipboard_temp, self))
+		elif self.clipboard.wait_is_text_available():
+			clipboard_tmp = self.clipboard.wait_for_text()
+			if clipboard_tmp not in ("", None):
+				if clipboard_tmp != self.clipboard_text:
+					if self.clipboard.wait_is_uris_available():
+						self.history.add(history.FileHistoryMenuItem(clipboard_tmp, self))
+					else:
+						self.history.add(history.TextHistoryMenuItem(clipboard_tmp, self))
+					self.clipboard_text = clipboard_tmp
+					# update menu
 					self.update_menu()
+					# save history
 					self.save_history()
-		return True # so timeout continues.
+		elif self.clipboard.wait_is_image_available():
+			clipboard_contents = self.clipboard.wait_for_image()
+			if self.clipboard_image == None or clipboard_contents.get_pixels() != self.clipboard_image.get_pixels():
+				self.history.add(history.ImageHistoryMenuItem(clipboard_contents, self))
+				self.clipboard_image = clipboard_contents
+				# update menu
+				self.update_menu()
+				# save history
+				self.save_history()
+		return True
 
 	# create and show the menu
 	def update_menu(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
@@ -146,9 +163,10 @@ class ClipboardProtector(object):
 		if len(self.history) > 0:
 			self.history.add_items_to_menu(menu)
 			menu.append(gtk.SeparatorMenuItem())
-		edit_clipboard_menu = gtk.MenuItem(_("Edit clipboard"))
-		edit_clipboard_menu.connect("activate", lambda w: edit.ClipboardEditorDialog())
-		menu.append(edit_clipboard_menu)
+		if self.history[0] and isinstance(self.history[0], history.TextHistoryMenuItem):
+			edit_clipboard_menu = gtk.MenuItem(_("Edit clipboard"))
+			edit_clipboard_menu.connect("activate", lambda w: edit.ClipboardEditorDialog())
+			menu.append(edit_clipboard_menu)
 		if len(self.history) > 0:
 			clean_menu = gtk.MenuItem(_("Clean history"))
 			clean_menu.connect("activate", self.clean_history)
