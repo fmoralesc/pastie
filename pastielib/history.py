@@ -26,11 +26,10 @@ class HistoryMenuItem():
 		self.payload = item
 		self.protector = protector
 		self.collector = protector.history
-		self.repr = self._repr()
 		
-	def _repr(self):
+	def get_label(self):
 		length = self.protector.gconf_client.get_item_length()
-		l = unicode(self.payload[:length + 1]).strip(' ')
+		l = unicode(self.payload[:length + 2]).strip(' ')
 		if len(l) > length:
 			l = l[:length-1] + u'\u2026'
 
@@ -160,7 +159,7 @@ class HistoryMenuItemCollector(HistoryCollector):
 	def add_items_to_menu(self, menu):
 		count = 0
 		for i in self:
-			item = gtk.MenuItem(i.repr)
+			item = gtk.MenuItem(i.get_label())
 			item.connect("activate", i.set_as_current)
 			menu.append(item)
 			count =+ 1
