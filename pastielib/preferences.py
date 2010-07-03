@@ -5,7 +5,7 @@ import gconf
 
 GCONF_ROOT = '/apps/pastie/prefs'
 
-class PrefsGConfClient:
+class PrefsGConfClient(object):
 	def __init__(self):
 		self.gconf_client = gconf.client_get_default()
 		self.gconf_client.add_dir(GCONF_ROOT, gconf.CLIENT_PRELOAD_NONE)
@@ -31,7 +31,7 @@ class PrefsGConfClient:
 	def set_item_length(self, value):
 		self.gconf_client.set_int(GCONF_ROOT + '/item_length', value)
 
-class PreferencesDialog:
+class PreferencesDialog():
 	def __init__(self):
 		self.gconf_client = PrefsGConfClient()
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
@@ -69,7 +69,7 @@ class PreferencesDialog:
 		item_length_pref_align.add(item_length_pref_label)
 		item_length_pref_box.pack_start(item_length_pref_align)
 			
-		self.item_length_pref_spin = gtk.SpinButton(gtk.Adjustment(lower=2.0, upper=60.0, step_incr=1.0))
+		self.item_length_pref_spin = gtk.SpinButton(gtk.Adjustment(lower=20.0, upper=60.0, step_incr=1.0))
 		self.item_length_pref_spin.set_value(self.gconf_client.get_item_length())
 		self.item_length_pref_spin.connect("value-changed", self.change_item_length)
 		item_length_pref_box.pack_end(self.item_length_pref_spin, expand=False)
