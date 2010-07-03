@@ -19,14 +19,27 @@
 
 import gtk
 import gtk.gdk
+import gnomevfs
 
-# class representing history items.
+# parent class for history menu items
 class HistoryMenuItem():
 	def __init__(self, item, protector):
 		self.payload = item
 		self.protector = protector
 		self.collector = protector.history
-		
+
+	# subclasses must override this
+	def get_label(self):
+		pass
+
+	# set payload as current clipboard content.
+	# subclasses must extend this.
+	def set_as_current(self, event=None):
+		self.collector.select(self)
+		self.protector.update_menu()
+
+# class representing text items.
+class TextHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
 		length = self.protector.gconf_client.get_item_length()
 		l = unicode(self.payload[:length + 2]).strip(' ')
@@ -38,15 +51,61 @@ class HistoryMenuItem():
 		
 		return l
 
-	# set payload as current clipboard content.
 	def set_as_current(self, event=None):
-		self.collector.select(self)
-		self.protector.update_menu()
+		HistoryMenuItem.set_as_current(self, event)
 		self.protector.clipboard.set_text(self.payload)
 		self.protector.clipboard.store()
 
+# class representing file items
+class FileHistoryMenuItem(HistoryMenuItem):
+	def get_label(self):
+		lines = self.payload.split("\n")
+		length = self.protector.gconf_client.get_item_length()
+		files_with_comma = unicode(self.payload[:length + 2]).strip((' ', '\t'))
+		if len(files_with_comma) > length:
+			files_with_comma = files_with_comma[:length-1] + u'\u2026'
+		if lines = 1:
+			l = "[file: " + files_with_comma + "]"
+		else:
+			files_with_comma = files_with_comma.replace('\n', ', ')
+			l = "[" + lines + "files: " + files_with_comma + "]"
+		return l
+
+	def set_as_current(self, event=None):
+		def path_get(clipboard, selectiondata, info, path) :
+			selectiondata.set_text(path)
+			files = path.split("\n")
+			file_paths = []
+			for copied_file in files:
+				file_path = gnomevfs.escape_path_string(copied_file)
+				file_paths.append('file://' + file_path)
+			selectiondata.set_uris(file_paths)
+			selectiondata.set('x-special/gnome-copied-files', 8, 'copy\n' + '\n'.join(file_paths))
+
+		def path_clear(self, path):
+			return
+
+		HistoryMenuItem.set_as_current(self, event)
+		targets = gtk.target_list_add_uri_targets()
+		targets = gtk.target_list_add_text_targets(targets)
+		targets.append(('x-special/gnome-copied-files', 0, 0))
+
+		self.protector.clipboard.set_with_data(targets, path_get, path_clear, self.payload)
+		self.protector.clipboard.store()
+
+# class representing image items
+class ImageHistoryMenuItem(HistoryMenuItem):
+	def get_label(self):
+		l = "[pix: " + self.payload.props.width + u"\u2715" + self.payload.props.height + "]"
+		return l
+
+	def set_as_current(self, event=None):
+		HistoryMenuItem.set_as_current(self, event)
+		self.protector.clipboard.set_image(self.payload)
+		self.protector.clipboard.store()
+
 # class representin the history items collection.
-class HistoryCollector():
+class HistoryCollector(object):
 	def __init__(self, maxlen=25): #change maxlen to tweak history size
 		self.iter_count = -1
 		self.data = []
@@ -163,16 +222,3 @@ class HistoryMenuItemCollector(HistoryCollector):
 			item.connect("activate", i.set_as_current)
 			menu.append(item)
 			count =+ 1
-
-if __name__ == "__main__":
-	b = HistoryCollector(maxlen=2)
-	c = HistoryMenuItem("help1", b)
-	b.add(c)
-	d = HistoryMenuItem("help2", b)
-	b.add(d)
-	b.repr()
-	c.set_as_current(None)
-	b.repr()
-	e = HistoryMenuItem("help3", b)
-	b.add(e)
-	b.repr()

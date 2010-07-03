@@ -26,7 +26,7 @@ import pastielib.history as history
 import pastielib.edit_clipboard as edit
 import pastielib.preferences as prefs
 
-class ClipboardProtector():
+class ClipboardProtector(object):
 	def __init__(self, indicator):
 		# set the gconf_client
 		self.gconf_client = prefs.PrefsGConfClient()
@@ -69,7 +69,7 @@ class ClipboardProtector():
 		except ExpatError: # file is empty or malformed
 			return tmp_list
 		for item in history_tree.findall("item"):
-			history_item = history.HistoryMenuItem(item.text, self)
+			history_item = history.TextHistoryMenuItem(item.text, self)
 			tmp_list.append(history_item)
 		return tmp_list
 	
@@ -103,7 +103,7 @@ class ClipboardProtector():
 			if clipboard_temp != self.clipboard_text:
 				if clipboard_temp != "":
 					self.clipboard_text = clipboard_temp
-					self.history.add(history.HistoryMenuItem(clipboard_temp, self))
+					self.history.add(history.TextHistoryMenuItem(clipboard_temp, self))
 					self.update_menu()
 					self.save_history()
 		return True # so timeout continues.
