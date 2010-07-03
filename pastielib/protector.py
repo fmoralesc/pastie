@@ -69,7 +69,20 @@ class ClipboardProtector(object):
 		except ExpatError: # file is empty or malformed
 			return tmp_list
 		for item in history_tree.findall("item"):
-			history_item = history.TextHistoryMenuItem(item.text, self)
+			if item.get("type") == "text":
+				history_item = history.TextHistoryMenuItem(item.text, self)
+			elif item.get("type") == "file":
+				history_item = history.FileHistoryMenuItem(item.text, self)
+			elif item.get("type") == "image":
+				data = item.text
+				has_alpha = bool(item.get("has_alpha"))
+				width = int(item.get("width"))
+				height = int(item.get("height"))
+				rowstride = int(item.get("rowstride"))
+				pixbuf = gtk.pixbuf_new_from_data(data, gtk.gdk.COLORSPACE_RGB, has_alpha, 8, width, height, rowstride)
+				history_item = history.ImageHistoryMenuItem(pixbuf, self)
+			else:
+				history_item = history.TextHistoryMenuItem(item.text, self)
 			tmp_list.append(history_item)
 		return tmp_list
 	
@@ -79,7 +92,26 @@ class ClipboardProtector(object):
 		for item in self.history.data:
 			history_tree_item = tree.SubElement(history_tree_root, "item")
 			history_tree_item.set("id", hashlib.md5(item.payload).hexdigest())
-			history_tree_item.text = item.payload
+			
+			if isinstance(history_tree_item, history.TextHistoryMenuItem):
+				item_type = "text"
+			elif isinstance(history_tree_item, history.FileHistoryMenuItem):
+				item_type = "file"
+			elif isinstance(history_tree_item, history.ImageHistoryMenuItem):
+				item_type = "image"
+			else:
+				item_type = "text"
+			history_tree_item.set("type", item_type)
+
+			if item_type in ("text", "file"):
+				history_tree_item.text = item.payload
+			elif item_type == "image":
+				history_tree_item.set("has_alpha", str(item.payload.props.has_alpha))
+				history_tree.item.set("width", str(item.payload.props.width))
+				history_tree_item.set("height", str(item.payload.props.height))
+				history_tree_item.set("rowstride", str(item.payload.props.rowstride))
+				history_tree_item.text = item.payload.get_pixels()
+
 		history_tree = tree.ElementTree(history_tree_root)
 		history_tree.write(os.path.expanduser(output_file), "UTF-8")
 

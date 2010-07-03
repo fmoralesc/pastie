@@ -42,7 +42,7 @@ class HistoryMenuItem():
 class TextHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
 		length = self.protector.gconf_client.get_item_length()
-		l = unicode(self.payload[:length + 2]).strip(' ')
+		l = unicode(self.payload[:length + length]).strip(' ')
 		if len(l) > length:
 			l = l[:length-1] + u'\u2026'
 
@@ -61,10 +61,10 @@ class FileHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
 		lines = self.payload.split("\n")
 		length = self.protector.gconf_client.get_item_length()
-		files_with_comma = unicode(self.payload[:length + 2]).strip((' ', '\t'))
+		files_with_comma = unicode(self.payload[:length + length]).strip((' ', '\t'))
 		if len(files_with_comma) > length:
 			files_with_comma = files_with_comma[:length-1] + u'\u2026'
-		if lines = 1:
+		if lines == 1:
 			l = "[file: " + files_with_comma + "]"
 		else:
 			files_with_comma = files_with_comma.replace('\n', ', ')
