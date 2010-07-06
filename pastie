@@ -22,6 +22,8 @@ import gettext
 import gtk
 import appindicator
 import keybinder
+import os.path
+from os import *
 
 import pastielib.protector as protector
 import pastielib.cli as cli
@@ -50,11 +52,18 @@ if __name__ == "__main__":
 
 	# load translations
 	gettext.install("pastie", "/usr/share/locale")
-	
+		
 	# create indicator
-	indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_APPLICATION_STATUS)
+	pastieDir = path.join(os.path.expanduser('~'), '.pastie/')
+	pastieIcon = path.join(os.path.expanduser('~'), '.pastie/pastie.svg')
+	
+	if os.path.isfile(pastieIcon) == True:
+		indicator = appindicator.Indicator("pastie", "pastie", appindicator.CATEGORY_APPLICATION_STATUS, pastieDir)
+	else:
+		indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_APPLICATION_STATUS)
+	
 	indicator.set_status(appindicator.STATUS_ACTIVE)
-
+	
 	# keybind preferences dialog
 	keybinder.bind("<Control><Alt>P", lambda : prefs.PreferencesDialog())
 
