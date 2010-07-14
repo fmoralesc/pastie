@@ -20,13 +20,10 @@ import sys
 import getopt
 import gettext
 import gtk
-import appindicator
 import keybinder
-import os.path
-from os import *
 
-import pastielib.protector as protector
 import pastielib.cli as cli
+import pastielib.protector as protector
 import pastielib.preferences as prefs
 
 if __name__ == "__main__":
@@ -53,21 +50,10 @@ if __name__ == "__main__":
 	# load translations
 	gettext.install("pastie", "/usr/share/locale")
 		
-	# create indicator
-	pastieDir = path.join(os.path.expanduser('~'), '.pastie/')
-	pastieIcon = path.join(os.path.expanduser('~'), '.pastie/pastie.svg')
-	
-	if os.path.isfile(pastieIcon) == True:
-		indicator = appindicator.Indicator("pastie", "pastie", appindicator.CATEGORY_APPLICATION_STATUS, pastieDir)
-	else:
-		indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_APPLICATION_STATUS)
-	
-	indicator.set_status(appindicator.STATUS_ACTIVE)
-	
 	# keybind preferences dialog
 	keybinder.bind("<Control><Alt>P", lambda : prefs.PreferencesDialog())
 
 	# create clipboard protector (this is the core of the program)
-	clipboard_protector = protector.ClipboardProtector(indicator)
+	clipboard_protector = protector.ClipboardProtector()
 
 	gtk.main()

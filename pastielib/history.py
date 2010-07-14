@@ -17,12 +17,15 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import gobject
 import gtk
 import gtk.gdk
 import gnomevfs
 
+import pastielib.preferences as prefs
+
 # parent class for history menu items
-class HistoryMenuItem():
+class HistoryMenuItem(gobject.GObject):
 	def __init__(self, item, protector):
 		self.payload = item
 		self.protector = protector
@@ -41,7 +44,7 @@ class HistoryMenuItem():
 # class representing text items.
 class TextHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
-		length = self.protector.gconf_client.get_item_length()
+		length = prefs.get_item_length()
 		l = unicode(self.payload[:length+length]).strip(' ')
 		if len(l) > length:
 			l = l[:length-1] + u'\u2026'
@@ -59,7 +62,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
-		length = self.protector.gconf_client.get_item_length()
+		length = prefs.get_item_length()
 		lines = self.payload.split("\n")
 		files_with_comma = unicode(",".join(lines)[:length+length])
 		if len(files_with_comma) > length:
@@ -110,15 +113,18 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 		self.protector.clipboard.store()
 
 # class representin the history items collection.
-class HistoryCollector(object):
-	def __init__(self, maxlen=25): #change maxlen to tweak history size
+class HistoryCollector(gobject.GObject):
+	def __init__(self): #change maxlen to tweak history size
+		gobject.GObject.__init__(self)
 		self.iter_count = -1
 		self.data = []
-		self.maxlen = maxlen
+		self.maxlen = prefs.get_history_size()
 
 	# load data. used when reading history from file.
 	def set_payload(self, payload):
-		self.data = payload
+		for item in payload:
+			if len(self.data) < self.maxlen:
+				self.data.append(item)
 
 	# returns the number of members of collection
 	def __len__(self):
@@ -213,21 +219,19 @@ class HistoryCollector(object):
 
 # wrapper that adds menuitems to a menu
 class HistoryMenuItemCollector(HistoryCollector):
-	def __init__(self, protector):
+	def __init__(self):
 		HistoryCollector.__init__(self)
-		self.protector = protector
-		self.maxlen = self.protector.gconf_client.get_history_size()
-
+		self.maxlen = prefs.get_history_size()
+		gobject.signal_new("length-adjusted", HistoryMenuItemCollector, gobject.SIGNAL_ACTION, None, (int,))
+		
 	def adjust_maxlen(self, gconf=None, key=None, value=None, d=None):
-		self.maxlen = self.protector.gconf_client.get_history_size()
+		self.maxlen = prefs.get_history_size()
 		self.data = self.data[:self.maxlen]
-		self.protector.update_menu()
+		self.emit("length-adjusted", self.maxlen)
 
 	def add_items_to_menu(self, menu):
-		count = 0
 		for i in self:
 			label = i.get_label()
 			item = gtk.MenuItem(label)
 			item.connect("activate", i.set_as_current)
 			menu.append(item)
-			count =+ 1
