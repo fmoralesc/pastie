@@ -183,6 +183,8 @@ class HistoryMenuItemCollector(gobject.GObject):
 				# we grab the data we want to preserve
 				tail = self.data[0:self.maxlen - 1]
 				# clean the collection
+				for i in self.data:
+					del i
 				self.data = []
 				# add the new data
 				self.data.append(data)
@@ -206,6 +208,8 @@ class HistoryMenuItemCollector(gobject.GObject):
 		head = self.data[0:idx]
 		tail = self.data[idx + 1:]
 		
+		for i in self.data:
+			del i
 		self.data = []
 		self.data.append(selected_data)
 		for item in head:
