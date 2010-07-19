@@ -93,6 +93,7 @@ class FileHistoryMenuItem(HistoryMenuItem):
 # class representing image items
 class ImageHistoryMenuItem(HistoryMenuItem):
 	def __init__(self, item):
+		gobject.GObject.__init__(self)
 		self.pixbuf = item
 		self.payload = self.pixbuf.get_pixels()
 	
@@ -102,8 +103,8 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
-		gtk.clipboard_get().clipboard.set_image(self.pixbuf)
-		gtk.clipboard_get().clipboard.store()
+		gtk.clipboard_get().set_image(self.pixbuf)
+		gtk.clipboard_get().store()
 
 # class representin the history items collection.
 class HistoryMenuItemCollector(gobject.GObject):
