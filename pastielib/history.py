@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding=utf8
-
 #    This file is part of pastie - a simple clipboard manager
 #    Copyright (C) 2010  Felipe Morales <hel.sheep@gmail.com>
 #
@@ -26,10 +23,9 @@ import pastielib.preferences as prefs
 
 # parent class for history menu items
 class HistoryMenuItem(gobject.GObject):
-	def __init__(self, item, protector):
+	def __init__(self, item):
+		gobject.GObject.__init__(self)
 		self.payload = item
-		self.protector = protector
-		self.collector = protector.history
 
 	# subclasses must override this
 	def get_label(self):
@@ -38,8 +34,7 @@ class HistoryMenuItem(gobject.GObject):
 	# set payload as current clipboard content.
 	# subclasses must extend this.
 	def set_as_current(self, event=None):
-		self.collector.select(self)
-		self.protector.update_menu()
+		self.emit("select", self)
 
 # class representing text items.
 class TextHistoryMenuItem(HistoryMenuItem):
@@ -56,8 +51,8 @@ class TextHistoryMenuItem(HistoryMenuItem):
 
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
-		self.protector.clipboard.set_text(self.payload)
-		self.protector.clipboard.store()
+		gtk.clipboard_get().set_text(self.payload)
+		gtk.clipboard_get().store()
 
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
@@ -92,16 +87,14 @@ class FileHistoryMenuItem(HistoryMenuItem):
 		targets = gtk.target_list_add_text_targets(targets)
 		targets.append(('x-special/gnome-copied-files', 0, 0))
 
-		self.protector.clipboard.set_with_data(targets, path_get, path_clear, self.payload)
-		self.protector.clipboard.store()
+		gtk.clipboard_get().set_with_data(targets, path_get, path_clear, self.payload)
+		gtk.clipboard_get().store()
 
 # class representing image items
 class ImageHistoryMenuItem(HistoryMenuItem):
-	def __init__(self, item, protector):
+	def __init__(self, item):
 		self.pixbuf = item
 		self.payload = self.pixbuf.get_pixels()
-		self.protector = protector
-		self.collector = protector.history
 	
 	def get_label(self):
 		l = "[image: " + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
@@ -109,11 +102,11 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
-		self.protector.clipboard.set_image(self.pixbuf)
-		self.protector.clipboard.store()
+		gtk.clipboard_get().clipboard.set_image(self.pixbuf)
+		gtk.clipboard_get().clipboard.store()
 
 # class representin the history items collection.
-class HistoryCollector(gobject.GObject):
+class HistoryMenuItemCollector(gobject.GObject):
 	def __init__(self): #change maxlen to tweak history size
 		gobject.GObject.__init__(self)
 		self.iter_count = -1
@@ -125,6 +118,9 @@ class HistoryCollector(gobject.GObject):
 		for item in payload:
 			if len(self.data) < self.maxlen:
 				self.data.append(item)
+		for item in self:
+			item.connect("select", self.select)
+		self.emit("data-change", len(self))
 
 	# returns the number of members of collection
 	def __len__(self):
@@ -192,6 +188,9 @@ class HistoryCollector(gobject.GObject):
 				# reappend the data we preserved before
 				for item in tail:
 					self.data.append(item)
+				self.emit("data-change", len(self))
+			for item in self:
+				item.connect("select", self.select)
 		# if it does exist in collection
 		else:
 			found_at = self.existing_index(data)
@@ -200,7 +199,7 @@ class HistoryCollector(gobject.GObject):
 				self.select(self.data[found_at])
 
 	# set some item as the current member of the selection (top)
-	def select(self, data):
+	def select(self, event, data):
 		idx = self.data.index(data)
 		selected_data = self.data[idx]
 		head = self.data[0:idx]
@@ -212,20 +211,19 @@ class HistoryCollector(gobject.GObject):
 			self.data.append(item)
 		for item in tail:
 			self.data.append(item)
+		self.emit("data-change", len(self))
 	
 	# clear the history
 	def empty(self):
+		for i in self:
+			del i
 		self.data = []
+		self.emit("data-change", len(self))
 
-# wrapper that adds menuitems to a menu
-class HistoryMenuItemCollector(HistoryCollector):
-	def __init__(self):
-		HistoryCollector.__init__(self)
-		self.maxlen = prefs.get_history_size()
-		gobject.signal_new("length-adjusted", HistoryMenuItemCollector, gobject.SIGNAL_ACTION, None, (int,))
-		
 	def adjust_maxlen(self, gconf=None, key=None, value=None, d=None):
 		self.maxlen = prefs.get_history_size()
+		for i in self.data[self.maxlen:]:
+			del i
 		self.data = self.data[:self.maxlen]
 		self.emit("length-adjusted", self.maxlen)
 
@@ -235,3 +233,10 @@ class HistoryMenuItemCollector(HistoryCollector):
 			item = gtk.MenuItem(label)
 			item.connect("activate", i.set_as_current)
 			menu.append(item)
+
+def new_signal(label, class_name, flag=gobject.SIGNAL_ACTION, ret=None, args=(int,)):
+	gobject.signal_new(label, class_name, flag, ret, args)
+
+new_signal("data-change", HistoryMenuItemCollector)
+new_signal("length-adjusted", HistoryMenuItemCollector)
+new_signal("select", HistoryMenuItem, args=(object,))

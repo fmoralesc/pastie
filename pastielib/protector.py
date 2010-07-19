@@ -43,8 +43,6 @@ class ClipboardProtector(object):
 		
 		# get the clipboard gdk atom
 		self.clipboard = gtk.clipboard_get(gtk.gdk.SELECTION_CLIPBOARD)
-		# check clipboard changes on owner-change event
-		self.clipboard.connect("owner-change", self.check)
 
 		self.clipboard_text = ""
 		self.clipboard_image = None
@@ -53,6 +51,8 @@ class ClipboardProtector(object):
 		self.history = history.HistoryMenuItemCollector()
 		# the menu will be updated when the "item-lenght-adjusted" signal in the history object is emitted
 		self.history.connect("length-adjusted", self.update_menu)
+		# ... and when data changes 
+		self.history.connect("data-change", self.update_menu)
 		# load history if existent
 		self.history.set_payload(self.recover_history())
 		# pastie might have been loaded after some contents were added to the X clipboard.
@@ -62,18 +62,17 @@ class ClipboardProtector(object):
 		if len(self.history) > 0:
 			self.history[0].set_as_current()
 
-		# show the menu
-		self.update_menu()
-	
 		# set the gconf_client
 		self.gconf_client = prefs.PrefsGConfClient()
 	
-		# register gconf preferences changes  callback functions
+		# register gconf preferences changes callback functions
 		self.gconf_client.notify_add('show_quit_on_menu', self.update_menu)
 		self.gconf_client.notify_add('item_length', self.update_menu)
 		self.gconf_client.notify_add('history_size', self.history.adjust_maxlen)
-
-		# register the timeout that checks the clipboard contents
+		
+		# check clipboard changes on owner-change event
+		self.clipboard.connect("owner-change", self.check)
+		# run an auxiloary loop for special cases (e.g., gvim)
 		gobject.timeout_add(500, self.check_specials)
 
 	# returns a list of history items from a XML file.
@@ -87,9 +86,9 @@ class ClipboardProtector(object):
 			return tmp_list
 		for item in history_tree.findall("item"):
 			if item.get("type") == "text":
-				history_item = history.TextHistoryMenuItem(item.text, self)
+				history_item = history.TextHistoryMenuItem(item.text)
 			elif item.get("type") == "file":
-				history_item = history.FileHistoryMenuItem(item.text, self)
+				history_item = history.FileHistoryMenuItem(item.text)
 			elif item.get("type") == "image":
 				data = base64.b64decode(item.text)
 				has_alpha = bool(item.get("has_alpha"))
@@ -97,9 +96,9 @@ class ClipboardProtector(object):
 				height = int(item.get("height"))
 				rowstride = int(item.get("rowstride"))
 				pixbuf = gtk.gdk.pixbuf_new_from_data(data, gtk.gdk.COLORSPACE_RGB, has_alpha, 8, width, height, rowstride)
-				history_item = history.ImageHistoryMenuItem(pixbuf, self)
+				history_item = history.ImageHistoryMenuItem(pixbuf)
 			else:
-				history_item = history.TextHistoryMenuItem(item.text, self)
+				history_item = history.TextHistoryMenuItem(item.text)
 			tmp_list.append(history_item)
 		return tmp_list
 	
@@ -152,21 +151,17 @@ class ClipboardProtector(object):
 			if clipboard_tmp not in ("", None):
 				if clipboard_tmp != self.clipboard_text:
 					if self.clipboard.wait_is_uris_available():
-						self.history.add(history.FileHistoryMenuItem(clipboard_tmp, self))
+						self.history.add(history.FileHistoryMenuItem(clipboard_tmp))
 					else:
-						self.history.add(history.TextHistoryMenuItem(clipboard_tmp, self))
+						self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
 					self.clipboard_text = clipboard_tmp
-					# update menu
-					self.update_menu()
 					# save history
 					self.save_history()
 		elif self.clipboard.wait_is_image_available():
 			clipboard_contents = self.clipboard.wait_for_image()
 			if self.clipboard_image == None or clipboard_contents.get_pixels() != self.clipboard_image.get_pixels():
-				self.history.add(history.ImageHistoryMenuItem(clipboard_contents, self))
+				self.history.add(history.ImageHistoryMenuItem(clipboard_contents))
 				self.clipboard_image = clipboard_contents
-				# update menu
-				self.update_menu()
 				# save history
 				self.save_history()
 		return True
@@ -177,9 +172,8 @@ class ClipboardProtector(object):
 			if '_VIM_TEXT' in targets:
 				clipboard_tmp = self.clipboard.wait_for_text()
 				if clipboard_tmp not in ("", None) and clipboard_tmp != self.clipboard_text:
-					self.history.add(history.TextHistoryMenuItem(clipboard_tmp, self))
+					self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
 					self.clipboard_text = clipboard_tmp
-					self.update_menu()
 					self.save_history()
 		return True
 	
