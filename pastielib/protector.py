@@ -30,29 +30,29 @@ import pastielib.preferences as prefs
 
 class ClipboardProtector(object):
 	def __init__(self):
-		# create indicator
+		# try to load custom icon from ~/.pastie/
 		pastieDir = os.path.join(os.path.expanduser('~'), '.pastie/')
-		pastieIcon = os.path.join(os.path.expanduser('~'), '.pastie/pastie.svg')
-	
+		pastieIcon = os.path.expanduser('~/.pastie/pastie.svg')
 		if os.path.isfile(pastieIcon) == True:
 			self.indicator = appindicator.Indicator("pastie", "pastie", appindicator.CATEGORY_APPLICATION_STATUS, pastieDir)
 		else:
 			self.indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_APPLICATION_STATUS)
-	
+		# set the indicator as active (pastie must be always shown)
 		self.indicator.set_status(appindicator.STATUS_ACTIVE)
 		
 		# get the clipboard gdk atom
 		self.clipboard = gtk.clipboard_get(gtk.gdk.SELECTION_CLIPBOARD)
 
-		self.clipboard_text = ""
-		self.clipboard_image = None
+		# we use this to check if clipboard contents changed on special cases
+		self.clipboard_specials_text = ""
 
 		# create the history data strucure
 		self.history = history.HistoryMenuItemCollector()
 		# the menu will be updated when the "item-lenght-adjusted" signal in the history object is emitted
 		self.history.connect("length-adjusted", self.update_menu)
-		# ... and when data changes 
+		# ... and when data changes
 		self.history.connect("data-change", self.update_menu)
+		
 		# load history if existent
 		self.history.set_payload(self.recover_history())
 		# pastie might have been loaded after some contents were added to the X clipboard.
@@ -133,47 +133,40 @@ class ClipboardProtector(object):
 
 	# erase the clipboard history. the current contents of the clipoard will remain.
 	def clean_history(self, event=None):
-		self.history.empty()
-		self.clipboard_text = ""
-		self.clipboard_image = None
+		self.history.empty(full=False)
 		self.check()
 		self.update_menu()
 	
 	# check clipboard contents.
 	def check(self, clipboard=None, event=None):
 		if not self.clipboard.wait_for_targets():
-			if self.clipboard_text != "" or self.clipboard_image != None:
-				if self.clipboard_text != "" : self.clipboard.set_text(self.clipboard_text)
-				if self.clipboard_image != None: self.clipboard.set_image(self.clipboard_image)
-				self.clipboard.store()
+			if self.history[0] != None:
+				self.history[0].set_as_current()
 		elif self.clipboard.wait_is_text_available():
 			clipboard_tmp = self.clipboard.wait_for_text()
 			if clipboard_tmp not in ("", None):
-				if clipboard_tmp != self.clipboard_text:
-					if self.clipboard.wait_is_uris_available():
-						self.history.add(history.FileHistoryMenuItem(clipboard_tmp))
-					else:
-						self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
-					self.clipboard_text = clipboard_tmp
-					# save history
-					self.save_history()
-		elif self.clipboard.wait_is_image_available():
-			clipboard_contents = self.clipboard.wait_for_image()
-			if self.clipboard_image == None or clipboard_contents.get_pixels() != self.clipboard_image.get_pixels():
-				self.history.add(history.ImageHistoryMenuItem(clipboard_contents))
-				self.clipboard_image = clipboard_contents
+				if self.clipboard.wait_is_uris_available():
+					self.history.add(history.FileHistoryMenuItem(clipboard_tmp))
+				else:
+					self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
 				# save history
 				self.save_history()
-		return True
+		elif self.clipboard.wait_is_image_available():
+			clipboard_contents = self.clipboard.wait_for_image()
+			self.history.add(history.ImageHistoryMenuItem(clipboard_contents))
+			# save history
+			self.save_history()
 
 	def check_specials(self):
 		targets = self.clipboard.wait_for_targets()
+		# if there are no targets, we simply return True
 		if targets != None:
+			# vim doesn't set the timestamp target, so we have to check for its changes.
 			if '_VIM_TEXT' in targets:
 				clipboard_tmp = self.clipboard.wait_for_text()
-				if clipboard_tmp not in ("", None) and clipboard_tmp != self.clipboard_text:
+				if clipboard_tmp not in ("", None) and clipboard_tmp != self.clipboard_specials_text:
 					self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
-					self.clipboard_text = clipboard_tmp
+					self.clipboard_specials_text = clipboard_tmp
 					self.save_history()
 		return True
 	

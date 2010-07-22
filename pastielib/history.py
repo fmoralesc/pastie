@@ -219,10 +219,15 @@ class HistoryMenuItemCollector(gobject.GObject):
 		self.emit("data-change", len(self))
 	
 	# clear the history
-	def empty(self):
-		for i in self:
-			del i
-		self.data = []
+	def empty(self, full=True):
+		if full == True:
+			for i in self.data:
+				del i
+			self.data = []
+		else:
+			for i in self.data[1:]:
+				del i
+			self.data = [self.data[0]]
 		self.emit("data-change", len(self))
 
 	def adjust_maxlen(self, gconf=None, key=None, value=None, d=None):
