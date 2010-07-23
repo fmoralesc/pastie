@@ -63,9 +63,9 @@ class FileHistoryMenuItem(HistoryMenuItem):
 		if len(files_with_comma) > length:
 			files_with_comma = files_with_comma[:length-1] + u'\u2026'
 		if len(lines) == 1:
-			l = "[file: " + files_with_comma + "]"
+			l = "[" + _("file") + ": " + files_with_comma + "]"
 		else:
-			l = "[" + str(len(lines)) + " files: " + files_with_comma + "]"
+			l = "[" + str(len(lines)) + " " + _("files") + ": " + files_with_comma + "]"
 		return l
 
 	def set_as_current(self, event=None):
@@ -98,7 +98,7 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 		self.payload = self.pixbuf.get_pixels()
 	
 	def get_label(self):
-		l = "[image: " + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
+		l = "[" + _("image") + ": " + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
 		return l
 
 	def set_as_current(self, event=None):
@@ -178,6 +178,7 @@ class HistoryMenuItemCollector(gobject.GObject):
 			if len(self.data) == 0:
 				# we simply add the new data
 				self.data.append(data)
+				self.emit("data-change", len(self))
 			# if we have history data
 			else:
 				# we grab the data we want to preserve
