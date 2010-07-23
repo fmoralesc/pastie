@@ -145,7 +145,7 @@ class HistoryMenuItemCollector(gobject.GObject):
 		try:
 			return self.data[index]
 		except:
-			return False
+			return None
 		
 	# print a representation of the data. for debug purposes only.
 	def repr(self):

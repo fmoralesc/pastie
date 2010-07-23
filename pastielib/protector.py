@@ -149,12 +149,10 @@ class ClipboardProtector(object):
 					self.history.add(history.FileHistoryMenuItem(clipboard_tmp))
 				else:
 					self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
-				# save history
 				self.save_history()
 		elif self.clipboard.wait_is_image_available():
 			clipboard_contents = self.clipboard.wait_for_image()
 			self.history.add(history.ImageHistoryMenuItem(clipboard_contents))
-			# save history
 			self.save_history()
 
 	def check_specials(self):
@@ -176,14 +174,16 @@ class ClipboardProtector(object):
 		if len(self.history) > 0:
 			self.history.add_items_to_menu(menu)
 			menu.append(gtk.SeparatorMenuItem())
-		if self.history[0] and isinstance(self.history[0], history.TextHistoryMenuItem):
-			edit_clipboard_menu = gtk.MenuItem(_("Edit clipboard"))
-			edit_clipboard_menu.connect("activate", lambda w: edit.ClipboardEditorDialog())
-			menu.append(edit_clipboard_menu)
-		if len(self.history) > 0:
+			if isinstance(self.history[0], history.TextHistoryMenuItem):
+				edit_clipboard_menu = gtk.MenuItem(_("Edit clipboard"))
+				edit_clipboard_menu.connect("activate", lambda w: edit.ClipboardEditorDialog())
+				menu.append(edit_clipboard_menu)
 			clean_menu = gtk.MenuItem(_("Clean history"))
 			clean_menu.connect("activate", self.clean_history)
 			menu.append(clean_menu)
+		else:
+			nothing_to_show_menu = gtk.MenuItem(_("Nothing in history or clipboards"))
+			menu.append(nothing_to_show_menu)
 		if prefs.get_show_quit() == True:
 			quit_menu = gtk.MenuItem(_("Quit"))
 			quit_menu.connect("activate", lambda q: gtk.main_quit())
