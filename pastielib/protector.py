@@ -140,8 +140,14 @@ class ClipboardProtector(object):
 	# check clipboard contents.
 	def check(self, clipboard=None, event=None):
 		if not self.clipboard.wait_for_targets():
-			if self.history[0] != None:
-				self.history[0].set_as_current()
+			# some programs (JEdit) don't set the targets, but still set the text
+			no_targetted_text = self.clipboard.wait_for_text()
+			if no_targetted_text != None:
+				self.history.add(history.TextHistoryMenuItem(no_targetted_text))
+				self.save_history()
+			else:
+				if self.history[0] != None:
+					self.history[0].set_as_current()
 		elif self.clipboard.wait_is_text_available():
 			clipboard_tmp = self.clipboard.wait_for_text()
 			if clipboard_tmp not in ("", None):
