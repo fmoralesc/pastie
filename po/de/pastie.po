@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 4.X\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 19:23-0400\n"
+"POT-Creation-Date: 2010-07-26 02:21-0400\n"
 "PO-Revision-Date: 2010-06-22 21:29+0100\n"
 "Last-Translator: Frederik Hahne <frederik.hahne@googlemail.com>\n"
 "Language-Team: German Translation\n"
@@ -15,19 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../pastielib/edit_clipboard.py:28
+#: ../pastielib/edit_clipboard.py:27
 msgid "Editing clipboard"
 msgstr "Zwischenablage bearbeiten"
 
-#: ../pastielib/protector.py:117
+#: ../pastielib/edit_clipboard.py:58
+msgid "Replace"
+msgstr ""
+
+#: ../pastielib/protector.py:200
 msgid "Edit clipboard"
 msgstr "Zwischenablage bearbeiten"
 
-#: ../pastielib/protector.py:121
+#: ../pastielib/protector.py:203
 msgid "Clean history"
 msgstr "Verlauf leeren"
 
-#: ../pastielib/protector.py:125
+#: ../pastielib/protector.py:207
+msgid "Nothing in history or clipboards"
+msgstr ""
+
+#: ../pastielib/protector.py:210
 msgid "Quit"
 msgstr "Beenden"
 
@@ -35,19 +43,22 @@ msgstr "Beenden"
 msgid "Pastie preferences"
 msgstr "Pastie Einstellungen"
 
-#: ../pastielib/preferences.py:53
+#: ../pastielib/preferences.py:55
 msgid "History size"
 msgstr "Größe des Verlaufs"
 
-#: ../pastielib/preferences.py:66
+#: ../pastielib/preferences.py:68
 msgid "Menu history entries length"
 msgstr "Länge der Einträge im Verlauf"
 
-#: ../pastielib/preferences.py:77
+#: ../pastielib/preferences.py:81
 msgid "Misc"
 msgstr "Diverse Einstellungen"
 
-#: ../pastielib/preferences.py:79
+#: ../pastielib/preferences.py:83
 msgid "Show 'quit' on menu"
 msgstr "Zeige \"Beenden\" im Menu"
 
+#: ../pastielib/history.py:108
+msgid "more"
+msgstr ""

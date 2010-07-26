@@ -7,28 +7,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-18 19:23-0400\n"
+"POT-Creation-Date: 2010-07-26 02:21-0400\n"
 "PO-Revision-Date: 2010-06-18 19:41-0300\n"
 "Last-Translator: Pavel Reznikov <pashka.reznikov@gmail.com>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../pastielib/edit_clipboard.py:28
+#: ../pastielib/edit_clipboard.py:27
 msgid "Editing clipboard"
 msgstr "Редактирование буфера обмена"
 
-#: ../pastielib/protector.py:117
+#: ../pastielib/edit_clipboard.py:58
+msgid "Replace"
+msgstr ""
+
+#: ../pastielib/protector.py:200
 msgid "Edit clipboard"
 msgstr "Редактировать буфер обмена"
 
-#: ../pastielib/protector.py:121
+#: ../pastielib/protector.py:203
 msgid "Clean history"
 msgstr "Очистить историю"
 
-#: ../pastielib/protector.py:125
+#: ../pastielib/protector.py:207
+msgid "Nothing in history or clipboards"
+msgstr ""
+
+#: ../pastielib/protector.py:210
 msgid "Quit"
 msgstr ""
 
@@ -36,19 +45,22 @@ msgstr ""
 msgid "Pastie preferences"
 msgstr ""
 
-#: ../pastielib/preferences.py:53
+#: ../pastielib/preferences.py:55
 msgid "History size"
 msgstr ""
 
-#: ../pastielib/preferences.py:66
+#: ../pastielib/preferences.py:68
 msgid "Menu history entries length"
 msgstr ""
 
-#: ../pastielib/preferences.py:77
+#: ../pastielib/preferences.py:81
 msgid "Misc"
 msgstr ""
 
-#: ../pastielib/preferences.py:79
+#: ../pastielib/preferences.py:83
 msgid "Show 'quit' on menu"
 msgstr ""
 
+#: ../pastielib/history.py:108
+msgid "more"
+msgstr ""

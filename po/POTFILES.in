@@ -1,3 +1,4 @@
-../pastielib/edit_clipboard.py
-../pastielib/protector.py
-../pastielib/preferences.py
+pastielib/edit_clipboard.py
+pastielib/protector.py
+pastielib/preferences.py
+pastielib/history.py
