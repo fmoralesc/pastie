@@ -59,7 +59,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
-		# the extra mile.
+		# this shortens a pair of strings proportionally given a size constraint.
 		def balanced_constraint_shorten(pair, constraint):
 			total_length_to_shorten = len(pair[0]) + len(pair[1])
 
@@ -67,8 +67,7 @@ class FileHistoryMenuItem(HistoryMenuItem):
 				size_to_reduce = abs(constraint - total_length_to_shorten)
 				
 				string_ratio = Fraction(len(pair[0]),len(pair[1]))
-				first_ratio = string_ratio.numerator
-				second_ratio = string_ratio.denominator
+				first_ratio, second_ratio = string_ratio.numerator, string_ratio.denominator
 				total = string_ratio.denominator + string_ratio.numerator
 				
 				size_of_first_cut = (first_ratio * size_to_reduce / total) + 1
@@ -102,25 +101,32 @@ class FileHistoryMenuItem(HistoryMenuItem):
 			else:
 				return pair
 
-		length = prefs.get_item_length()
 		lines = self.payload.split("\n")
 		
+		# we want to see if there are more files than the one shown
 		if len(lines) > 1:
-			label = "  ( + " + str(len(lines)-1) + " " + _("more") + " ) "
+			label = "  (+ " + str(len(lines)-1) + " " + _("more") + ") "
 		else:
 			label = ""
+		
+		# we'll want to see if it's a regular file or a dir
+		if os.path.isdir(lines[0]):
+			first_file_tail = "/"
+		else:
+			first_file_tail = ""
+		first_file = os.path.basename(lines[0]) + first_file_tail
 
-		first_file = os.path.basename(lines[0])
-
+		# common_path is the folder where the copied files reside
 		if len(lines) == 1:
 			common_path = os.path.dirname(lines[0]) + "/"
 		else:
-			common_path = os.path.commonprefix(lines)
+			common_path = os.path.dirname(os.path.commonprefix(lines)) + "/"
 		common_path = common_path.replace(os.path.expanduser("~"), "~")
 		path_list = common_path.split("/")
 		last = len(path_list)-2
 		for d in range(last):
 			path_list[d] = path_list[d][0]
+		# we shorten the label, if it's needed
 		available = prefs.get_item_length() - len(label) - len("/".join(path_list[:last-1])) - 5
 		first_file, path_list[last] = balanced_constraint_shorten((first_file, path_list[last]), available)
 
@@ -292,6 +298,17 @@ class HistoryMenuItemCollector(gobject.GObject):
 			for i in self.data[1:]:
 				del i
 			self.data = [self.data[0]]
+		self.emit("data-change", len(self))
+
+	def delete_top(self):
+		self.data = self.data[1:]
+		if len(self) > 0:
+			self.select(None, self.data[0])
+		self.emit("data-change", len(self))
+	
+	def replace_top(self, data):
+		self.data[0] = data
+		self.select(None, self.data[0])
 		self.emit("data-change", len(self))
 
 	def adjust_maxlen(self, gconf=None, key=None, value=None, d=None):

@@ -133,11 +133,23 @@ class ClipboardProtector(object):
 
 	# erase the clipboard history. the current contents of the clipoard will remain.
 	def clean_history(self, event=None):
-		self.history.empty(full=False)
+		self.history.empty(full=True)
 		self.check()
 		self.save_history()
 		self.update_menu()
 	
+	def delete_current(self):
+		self.clipboard.clear()
+		self.history.delete_top()
+		self.save_history()
+		self.update_menu()
+
+	def replace_current(self, data):
+		self.clipboard.clear()
+		self.history.replace_top(history.TextHistoryMenuItem(data))
+		self.save_history()
+		self.update_menu()
+
 	# check clipboard contents.
 	def check(self, clipboard=None, event=None):
 		if not self.clipboard.wait_for_targets():
@@ -175,6 +187,9 @@ class ClipboardProtector(object):
 					self.save_history()
 		return True
 	
+	def create_edit_dialog(self, event):
+		edit_dialog = edit.ClipboardEditorDialog(self)
+
 	# create and show the menu
 	def update_menu(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
 		menu = gtk.Menu()
@@ -183,7 +198,7 @@ class ClipboardProtector(object):
 			menu.append(gtk.SeparatorMenuItem())
 			if isinstance(self.history[0], history.TextHistoryMenuItem):
 				edit_clipboard_menu = gtk.MenuItem(_("Edit clipboard"))
-				edit_clipboard_menu.connect("activate", lambda w: edit.ClipboardEditorDialog())
+				edit_clipboard_menu.connect("activate", self.create_edit_dialog)
 				menu.append(edit_clipboard_menu)
 			clean_menu = gtk.MenuItem(_("Clean history"))
 			clean_menu.connect("activate", self.clean_history)
