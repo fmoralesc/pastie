@@ -18,6 +18,8 @@ import gobject
 import gtk
 import gtk.gdk
 import gnomevfs
+import os.path
+from fractions import Fraction
 
 import pastielib.preferences as prefs
 
@@ -57,16 +59,77 @@ class TextHistoryMenuItem(HistoryMenuItem):
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
+		# the extra mile.
+		def balanced_constraint_shorten(pair, constraint):
+			total_length_to_shorten = len(pair[0]) + len(pair[1])
+
+			if constraint < total_length_to_shorten:
+				size_to_reduce = abs(constraint - total_length_to_shorten)
+				
+				string_ratio = Fraction(len(pair[0]),len(pair[1]))
+				first_ratio = string_ratio.numerator
+				second_ratio = string_ratio.denominator
+				total = string_ratio.denominator + string_ratio.numerator
+				
+				size_of_first_cut = (first_ratio * size_to_reduce / total) + 1
+				first_remainder_size = len(pair[0]) - size_of_first_cut
+				size_of_second_cut = (second_ratio * size_to_reduce / total) + 1
+				second_remainder_size = len(pair[1]) - size_of_second_cut
+
+				first_extreme_size = first_remainder_size/2
+				if first_extreme_size == 0:
+					first_extreme_size = 1
+				second_extreme_size = second_remainder_size/2
+				if second_extreme_size == 0:
+					second_extreme_size = 1
+
+				first = pair[0][:first_extreme_size] + u"\u2026" + pair[0][first_extreme_size+size_of_first_cut:]
+				if len(first) == len(pair[0]):
+					first = pair[0]
+				second = pair[1][:second_extreme_size] + u"\u2026" + pair[1][second_extreme_size+size_of_second_cut:]
+				if len(second) == len(pair[1]):
+					second = pair[1]
+				
+				# we might have missed it by 1
+				preliminary_lenght = len(first) + len(second)
+				if preliminary_lenght > constraint:
+					if len(first) > len(second):
+						first = pair[0][:first_extreme_size] + u"\u2026" + pair[0][first_extreme_size+size_of_first_cut+1:]
+					elif len(second) > len(first):
+						second = pair[1][:second_extreme_size] + u"\u2026" + pair[1][second_extreme_size+size_of_second_cut+1:]
+
+				return first, second
+			else:
+				return pair
+
 		length = prefs.get_item_length()
 		lines = self.payload.split("\n")
-		files_with_comma = unicode(",".join(lines)[:length+length])
-		if len(files_with_comma) > length:
-			files_with_comma = files_with_comma[:length-1] + u'\u2026'
-		if len(lines) == 1:
-			l = "[" + _("file") + ": " + files_with_comma + "]"
+		
+		if len(lines) > 1:
+			label = "  ( + " + str(len(lines)-1) + " " + _("more") + " ) "
 		else:
-			l = "[" + str(len(lines)) + " " + _("files") + ": " + files_with_comma + "]"
-		return l
+			label = ""
+
+		first_file = os.path.basename(lines[0])
+
+		if len(lines) == 1:
+			common_path = os.path.dirname(lines[0]) + "/"
+		else:
+			common_path = os.path.commonprefix(lines)
+		common_path = common_path.replace(os.path.expanduser("~"), "~")
+		path_list = common_path.split("/")
+		last = len(path_list)-2
+		for d in range(last):
+			path_list[d] = path_list[d][0]
+		available = prefs.get_item_length() - len(label) - len("/".join(path_list[:last-1])) - 5
+		first_file, path_list[last] = balanced_constraint_shorten((first_file, path_list[last]), available)
+
+		common_path = "/".join(path_list)
+
+		name_part = first_file + label
+		path_part = " [ " + common_path + " ]"
+		
+		return u"\u25A4 " + name_part + path_part
 
 	def set_as_current(self, event=None):
 		def path_get(clipboard, selectiondata, info, path):
@@ -98,7 +161,7 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 		self.payload = self.pixbuf.get_pixels()
 	
 	def get_label(self):
-		l = "[" + _("image") + ": " + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
+		l = u"\u25A3 [" + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
 		return l
 
 	def set_as_current(self, event=None):

@@ -135,6 +135,7 @@ class ClipboardProtector(object):
 	def clean_history(self, event=None):
 		self.history.empty(full=False)
 		self.check()
+		self.save_history()
 		self.update_menu()
 	
 	# check clipboard contents.
