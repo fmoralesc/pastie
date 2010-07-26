@@ -133,6 +133,7 @@ class ClipboardProtector(object):
 
 	# erase the clipboard history. the current contents of the clipoard will remain.
 	def clean_history(self, event=None):
+		self.clipboard.clear()
 		self.history.empty(full=True)
 		self.check()
 		self.save_history()
