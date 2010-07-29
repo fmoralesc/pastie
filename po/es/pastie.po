@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Felipe Morales <hel.sheep@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
@@ -21,13 +21,12 @@ msgid "Editing clipboard"
 msgstr "Editando el portapapeles"
 
 #: ../pastielib/edit_clipboard.py:57
-#, fuzzy
 msgid "_Replace"
 msgstr "Reemplazar"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #: ../pastielib/protector.py:201
 msgid "Edit clipboard"

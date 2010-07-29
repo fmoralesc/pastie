@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Jiri Grönroos
 # This file is distributed under the same license as the Pastie package.
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 0.5.x\n"
@@ -21,11 +21,11 @@ msgstr "Leikepöydän muokkaus"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr ""
+msgstr "_Korvaa"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr ""
+msgstr "K"
 
 #: ../pastielib/protector.py:201
 msgid "Edit clipboard"
@@ -33,11 +33,11 @@ msgstr "Muokkaa leikepöytää"
 
 #: ../pastielib/protector.py:204
 msgid "Clean history"
-msgstr "Pyyhi historia"
+msgstr "Tyhjennä historia"
 
 #: ../pastielib/protector.py:208
 msgid "Nothing in history or clipboards"
-msgstr ""
+msgstr "Historia ja leikepöytä ovat tyhjiä"
 
 #: ../pastielib/protector.py:211
 msgid "Quit"
@@ -65,4 +65,4 @@ msgstr "Näytä Lopeta-toiminto valikossa"
 
 #: ../pastielib/history.py:108
 msgid "more"
-msgstr ""
+msgstr "lisää"
