@@ -22,7 +22,7 @@ msgstr "Editando el portapapeles"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr "Reemplazar"
+msgstr "_Reemplazar"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
