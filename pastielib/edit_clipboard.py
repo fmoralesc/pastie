@@ -53,11 +53,12 @@ class ClipboardEditorDialog(object):
 		hbox = gtk.HButtonBox()
 		hbox.set_spacing(6)
 		hbox.set_layout(gtk.BUTTONBOX_END)
+		
+		gtk.stock_add( (('pastie-replace', _("_Replace"), gtk.gdk.MOD1_MASK, gtk.gdk.keyval_from_name(_('R')), 'pastie'),) )
+		
 		hbox.add(create_button(gtk.STOCK_CANCEL, self.cancel_action))
 		hbox.add(create_button(gtk.STOCK_DELETE, self.delete_action))
-		replace_button = gtk.Button(_("Replace"))
-		replace_button.connect("clicked", self.replace_action)
-		hbox.add(replace_button)
+		hbox.add(create_button("pastie-replace", self.replace_action))
 		hbox.add(create_button(gtk.STOCK_OK, self.ok_action))
 		
 		vbox.pack_end(hbox, expand=False)

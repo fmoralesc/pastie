@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 0.5.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-26 02:21-0400\n"
+"POT-Creation-Date: 2010-07-28 23:38-0400\n"
 "PO-Revision-Date: 2010-07-25 12:22+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish\n"
@@ -19,23 +19,27 @@ msgstr ""
 msgid "Editing clipboard"
 msgstr "Leikepöydän muokkaus"
 
-#: ../pastielib/edit_clipboard.py:58
-msgid "Replace"
+#: ../pastielib/edit_clipboard.py:57
+msgid "_Replace"
 msgstr ""
 
-#: ../pastielib/protector.py:200
+#: ../pastielib/edit_clipboard.py:57
+msgid "R"
+msgstr ""
+
+#: ../pastielib/protector.py:201
 msgid "Edit clipboard"
 msgstr "Muokkaa leikepöytää"
 
-#: ../pastielib/protector.py:203
+#: ../pastielib/protector.py:204
 msgid "Clean history"
 msgstr "Pyyhi historia"
 
-#: ../pastielib/protector.py:207
+#: ../pastielib/protector.py:208
 msgid "Nothing in history or clipboards"
 msgstr ""
 
-#: ../pastielib/protector.py:210
+#: ../pastielib/protector.py:211
 msgid "Quit"
 msgstr "Lopeta"
 

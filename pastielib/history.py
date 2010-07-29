@@ -118,14 +118,20 @@ class FileHistoryMenuItem(HistoryMenuItem):
 
 		# common_path is the folder where the copied files reside
 		if len(lines) == 1:
-			common_path = os.path.dirname(lines[0]) + "/"
+			if os.path.dirname(lines[0]) == "/":
+				common_path = "/"
+			else:
+				common_path = os.path.dirname(lines[0]) + "/"
 		else:
 			common_path = os.path.dirname(os.path.commonprefix(lines)) + "/"
 		common_path = common_path.replace(os.path.expanduser("~"), "~")
 		path_list = common_path.split("/")
 		last = len(path_list)-2
 		for d in range(last):
-			path_list[d] = path_list[d][0]
+			try:
+				path_list[d] = path_list[d][0]
+			except IndexError:
+				pass
 		# we shorten the label, if it's needed
 		available = prefs.get_item_length() - len(label) - len("/".join(path_list[:last-1])) - 5
 		first_file, path_list[last] = balanced_constraint_shorten((first_file, path_list[last]), available)

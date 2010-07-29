@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-26 02:21-0400\n"
+"POT-Creation-Date: 2010-07-28 23:38-0400\n"
 "PO-Revision-Date: 2010-06-18 19:12-0400\n"
 "Last-Translator: Felipe Morales <hel.sheep@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -20,23 +20,28 @@ msgstr ""
 msgid "Editing clipboard"
 msgstr "Editando el portapapeles"
 
-#: ../pastielib/edit_clipboard.py:58
-msgid "Replace"
+#: ../pastielib/edit_clipboard.py:57
+#, fuzzy
+msgid "_Replace"
 msgstr "Reemplazar"
 
-#: ../pastielib/protector.py:200
+#: ../pastielib/edit_clipboard.py:57
+msgid "R"
+msgstr ""
+
+#: ../pastielib/protector.py:201
 msgid "Edit clipboard"
 msgstr "Editar el portapapeles"
 
-#: ../pastielib/protector.py:203
+#: ../pastielib/protector.py:204
 msgid "Clean history"
 msgstr "Borrar el historial"
 
-#: ../pastielib/protector.py:207
+#: ../pastielib/protector.py:208
 msgid "Nothing in history or clipboards"
 msgstr "No hay nada en historial o el portapapeles"
 
-#: ../pastielib/protector.py:210
+#: ../pastielib/protector.py:211
 msgid "Quit"
 msgstr "Salir"
 

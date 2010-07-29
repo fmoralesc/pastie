@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 4.X\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-26 02:21-0400\n"
+"POT-Creation-Date: 2010-07-28 23:38-0400\n"
 "PO-Revision-Date: 2010-06-22 21:29+0100\n"
 "Last-Translator: Frederik Hahne <frederik.hahne@googlemail.com>\n"
 "Language-Team: German Translation\n"
@@ -19,23 +19,27 @@ msgstr ""
 msgid "Editing clipboard"
 msgstr "Zwischenablage bearbeiten"
 
-#: ../pastielib/edit_clipboard.py:58
-msgid "Replace"
+#: ../pastielib/edit_clipboard.py:57
+msgid "_Replace"
 msgstr ""
 
-#: ../pastielib/protector.py:200
+#: ../pastielib/edit_clipboard.py:57
+msgid "R"
+msgstr ""
+
+#: ../pastielib/protector.py:201
 msgid "Edit clipboard"
 msgstr "Zwischenablage bearbeiten"
 
-#: ../pastielib/protector.py:203
+#: ../pastielib/protector.py:204
 msgid "Clean history"
 msgstr "Verlauf leeren"
 
-#: ../pastielib/protector.py:207
+#: ../pastielib/protector.py:208
 msgid "Nothing in history or clipboards"
 msgstr ""
 
-#: ../pastielib/protector.py:210
+#: ../pastielib/protector.py:211
 msgid "Quit"
 msgstr "Beenden"
 
