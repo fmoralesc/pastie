@@ -324,13 +324,6 @@ class HistoryMenuItemCollector(gobject.GObject):
 		self.data = self.data[:self.maxlen]
 		self.emit("length-adjusted", self.maxlen)
 
-	def add_items_to_menu(self, menu):
-		for i in self:
-			label = i.get_label()
-			item = gtk.MenuItem(label)
-			item.connect("activate", i.set_as_current)
-			menu.append(item)
-
 def new_signal(label, class_name, flag=gobject.SIGNAL_ACTION, ret=None, args=(int,)):
 	gobject.signal_new(label, class_name, flag, ret, args)
 
