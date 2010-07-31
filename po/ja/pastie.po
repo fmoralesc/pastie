@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-28 23:38-0400\n"
+"POT-Creation-Date: 2010-07-31 14:37-0400\n"
 "PO-Revision-Date: 2010-06-18 19:48-0300\n"
 "Last-Translator: Marisol Barrios <marisol.barrios@gmail.com>\n"
 "Language-Team: Japanese\n"
@@ -28,19 +28,23 @@ msgstr ""
 msgid "R"
 msgstr ""
 
-#: ../pastielib/protector.py:201
+#: ../pastielib/protector.py:205
 msgid "Edit clipboard"
 msgstr "クリップボード編集"
 
-#: ../pastielib/protector.py:204
+#: ../pastielib/protector.py:210
+msgid "Remove current"
+msgstr ""
+
+#: ../pastielib/protector.py:213
 msgid "Clean history"
 msgstr "履歴消去"
 
-#: ../pastielib/protector.py:208
+#: ../pastielib/protector.py:217
 msgid "Nothing in history or clipboards"
 msgstr ""
 
-#: ../pastielib/protector.py:211
+#: ../pastielib/protector.py:220
 msgid "Quit"
 msgstr "終了"
 
