@@ -29,5 +29,6 @@ setup(
 		('/usr/share/locale/uk/LC_MESSAGES', ['po/uk/pastie.mo']),
 		('/usr/share/locale/it/LC_MESSAGES', ['po/it/pastie.mo']),
 		('/usr/share/locale/fi/LC_MESSAGES', ['po/fi/pastie.mo']),
+		('/usr/share/locale/he/LC_MESSAGES', ['po/he/pastie.mo']),
 		],
 	packages = ["pastielib"],)
