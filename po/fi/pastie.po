@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Jiri Grönroos
 # This file is distributed under the same license as the Pastie package.
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 0.5.x\n"
@@ -33,7 +33,7 @@ msgstr "Muokkaa leikepöytää"
 
 #: ../pastielib/protector.py:210
 msgid "Remove current"
-msgstr ""
+msgstr "Poista nykyinen"
 
 #: ../pastielib/protector.py:213
 msgid "Clean history"
