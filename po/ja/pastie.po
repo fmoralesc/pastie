@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Marisol Barrios <marisol.barrios@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
@@ -22,11 +22,11 @@ msgstr "クリップボード編集中"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr ""
+msgstr "置換する"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr ""
+msgstr "C"
 
 #: ../pastielib/protector.py:205
 msgid "Edit clipboard"
@@ -34,7 +34,7 @@ msgstr "クリップボード編集"
 
 #: ../pastielib/protector.py:210
 msgid "Remove current"
-msgstr ""
+msgstr "現在のエントリーを取る"
 
 #: ../pastielib/protector.py:213
 msgid "Clean history"
@@ -42,7 +42,7 @@ msgstr "履歴消去"
 
 #: ../pastielib/protector.py:217
 msgid "Nothing in history or clipboards"
-msgstr ""
+msgstr "歴史とクリップボードが空間"
 
 #: ../pastielib/protector.py:220
 msgid "Quit"
@@ -70,4 +70,4 @@ msgstr "メニューで「終了」を示す"
 
 #: ../pastielib/history.py:108
 msgid "more"
-msgstr ""
+msgstr "もっと"
