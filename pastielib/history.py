@@ -48,6 +48,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 
 		l = l.replace('\t', u'\u22c5')
 		l = l.replace('\n', u'\u21b2')
+		l = l.replace('_', '__')
 		
 		return l
 
