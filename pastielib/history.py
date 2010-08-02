@@ -142,7 +142,9 @@ class FileHistoryMenuItem(HistoryMenuItem):
 		name_part = first_file + label
 		path_part = " [ " + common_path + " ]"
 		
-		return u"\u25A4 " + name_part + path_part
+		l = u"\u25A4 " + name_part + path_part
+		l = l.replace("_", "__")
+		return l
 
 	def set_as_current(self, event=None):
 		def path_get(clipboard, selectiondata, info, path):
