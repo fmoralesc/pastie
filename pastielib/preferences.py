@@ -19,6 +19,12 @@ def get_show_quit():
 def set_show_quit(value):
 	gconf.client_get_default().set_bool(GCONF_ROOT + '/show_quit_on_menu', value)
 
+def get_show_prefs():
+	return gconf.client_get_default().get_bool(GCONF_ROOT +  '/show_preferences_on_menu')
+
+def set_show_prefs(value):
+	gconf.client_get_default().set_bool(GCONF_ROOT + '/show_preferences_on_menu', value)
+
 def get_history_size():
 	return gconf.client_get_default().get_int(GCONF_ROOT + '/history_size')
 
@@ -80,14 +86,25 @@ class PreferencesDialog():
 
 		misc_pref_expander = gtk.Expander(_("Misc"))
 
+		misc_prefs_box = gtk.VBox()
+
+		show_prefs_checkbutton = gtk.CheckButton(_("Show 'preferences' on menu"))
+		if get_show_prefs() == True:
+			show_prefs_checkbutton.set_active(True)
+		else:
+			show_prefs_checkbutton.set_active(False)
+		show_prefs_checkbutton.connect("toggled", self.toggle_show_prefs)
+		misc_prefs_box.pack_start(show_prefs_checkbutton)
+
 		show_misc_checkbutton = gtk.CheckButton(_("Show 'quit' on menu"))
 		if get_show_quit() == True:
 			show_misc_checkbutton.set_active(True)
 		else:
 			show_misc_checkbutton.set_active(False)
 		show_misc_checkbutton.connect("toggled", self.toggle_show_quit)
-		misc_pref_expander.add(show_misc_checkbutton)
+		misc_prefs_box.pack_end(show_misc_checkbutton)
 
+		misc_pref_expander.add(misc_prefs_box)
 		prefs_box.pack_start(misc_pref_expander)
 
 		vbox.pack_start(prefs_box)
@@ -100,6 +117,12 @@ class PreferencesDialog():
 			set_show_quit(0)
 		else:
 			set_show_quit(1)
+	
+	def toggle_show_prefs(self, event):
+		if get_show_prefs() == True:
+			set_show_prefs(0)
+		else:
+			set_show_prefs(1)
 
 	def change_history_size(self, event):
 		set_history_size(int(self.hist_size_pref_spin.get_value()))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-31 14:37-0400\n"
+"POT-Creation-Date: 2010-08-11 17:15-0400\n"
 "PO-Revision-Date: 2010-06-18 19:41-0300\n"
 "Last-Translator: Pavel Reznikov <pashka.reznikov@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -29,46 +29,56 @@ msgstr "_Заменить"
 msgid "R"
 msgstr "З"
 
-#: ../pastielib/protector.py:205
+#: ../pastielib/protector.py:209
 msgid "Edit clipboard"
 msgstr "Редактировать буфер обмена"
 
-#: ../pastielib/protector.py:210
+#: ../pastielib/protector.py:214
 msgid "Remove current"
 msgstr ""
 
-#: ../pastielib/protector.py:213
+#: ../pastielib/protector.py:217
 msgid "Clean history"
 msgstr "Очистить историю"
 
-#: ../pastielib/protector.py:217
+#: ../pastielib/protector.py:221
 msgid "Nothing in history or clipboards"
 msgstr "В истории или в буфере обмена пусто"
 
-#: ../pastielib/protector.py:220
+#: ../pastielib/protector.py:224
+#, fuzzy
+msgid "Preferences"
+msgstr "Настройки Pastie"
+
+#: ../pastielib/protector.py:228
 msgid "Quit"
 msgstr "Выход"
 
-#: ../pastielib/preferences.py:38
+#: ../pastielib/preferences.py:44
 msgid "Pastie preferences"
 msgstr "Настройки Pastie"
 
-#: ../pastielib/preferences.py:55
+#: ../pastielib/preferences.py:61
 msgid "History size"
 msgstr "Размер истории"
 
-#: ../pastielib/preferences.py:68
+#: ../pastielib/preferences.py:74
 msgid "Menu history entries length"
 msgstr "Длина истории в меню"
 
-#: ../pastielib/preferences.py:81
+#: ../pastielib/preferences.py:87
 msgid "Misc"
 msgstr "Разное"
 
-#: ../pastielib/preferences.py:83
+#: ../pastielib/preferences.py:91
+#, fuzzy
+msgid "Show 'preferences' on menu"
+msgstr "Показывать 'выход' в меню"
+
+#: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
 msgstr "Показывать 'выход' в меню"
 
-#: ../pastielib/history.py:108
+#: ../pastielib/history.py:109
 msgid "more"
 msgstr "еще"

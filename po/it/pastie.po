@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-31 14:37-0400\n"
+"POT-Creation-Date: 2010-08-11 17:15-0400\n"
 "PO-Revision-Date: 2010-06-19 19:12+0200\n"
 "Last-Translator: Luca Marra <luca@facciocose.it>\n"
 "Language-Team: Italian\n"
@@ -28,46 +28,56 @@ msgstr ""
 msgid "R"
 msgstr ""
 
-#: ../pastielib/protector.py:205
+#: ../pastielib/protector.py:209
 msgid "Edit clipboard"
 msgstr "Modifica appunti"
 
-#: ../pastielib/protector.py:210
+#: ../pastielib/protector.py:214
 msgid "Remove current"
 msgstr ""
 
-#: ../pastielib/protector.py:213
+#: ../pastielib/protector.py:217
 msgid "Clean history"
 msgstr "Cancella cronologia"
 
-#: ../pastielib/protector.py:217
+#: ../pastielib/protector.py:221
 msgid "Nothing in history or clipboards"
 msgstr ""
 
-#: ../pastielib/protector.py:220
+#: ../pastielib/protector.py:224
+#, fuzzy
+msgid "Preferences"
+msgstr "Preferenze di Pastie"
+
+#: ../pastielib/protector.py:228
 msgid "Quit"
 msgstr "Esci"
 
-#: ../pastielib/preferences.py:38
+#: ../pastielib/preferences.py:44
 msgid "Pastie preferences"
 msgstr "Preferenze di Pastie"
 
-#: ../pastielib/preferences.py:55
+#: ../pastielib/preferences.py:61
 msgid "History size"
 msgstr "Dimensione cronologia"
 
-#: ../pastielib/preferences.py:68
+#: ../pastielib/preferences.py:74
 msgid "Menu history entries length"
 msgstr "Lunghezza elementi del menu"
 
-#: ../pastielib/preferences.py:81
+#: ../pastielib/preferences.py:87
 msgid "Misc"
 msgstr "Altro"
 
-#: ../pastielib/preferences.py:83
+#: ../pastielib/preferences.py:91
+#, fuzzy
+msgid "Show 'preferences' on menu"
+msgstr "Mostra 'Esci' nel menu"
+
+#: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
 msgstr "Mostra 'Esci' nel menu"
 
-#: ../pastielib/history.py:108
+#: ../pastielib/history.py:109
 msgid "more"
 msgstr ""

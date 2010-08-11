@@ -67,6 +67,7 @@ class ClipboardProtector(object):
 	
 		# register gconf preferences changes callback functions
 		self.gconf_client.notify_add('show_quit_on_menu', self.update_menu)
+		self.gconf_client.notify_add('show_preferences_on_menu', self.update_menu)
 		self.gconf_client.notify_add('item_length', self.update_menu)
 		self.gconf_client.notify_add('history_size', self.history.adjust_maxlen)
 		
@@ -190,6 +191,9 @@ class ClipboardProtector(object):
 	
 	def create_edit_dialog(self, event):
 		edit_dialog = edit.ClipboardEditorDialog(self)
+	
+	def create_prefs_dialog(self, event):
+		prefs_dialog = prefs.PreferencesDialog()
 
 	# create and show the menu
 	def update_menu(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
@@ -216,6 +220,10 @@ class ClipboardProtector(object):
 		else:
 			nothing_to_show_menu = gtk.MenuItem(_("Nothing in history or clipboards"))
 			menu.append(nothing_to_show_menu)
+		if prefs.get_show_prefs() == True:
+			prefs_menu = gtk.MenuItem(_("Preferences" + u'\u2026'))
+			prefs_menu.connect("activate", self.create_prefs_dialog)
+			menu.append(prefs_menu)
 		if prefs.get_show_quit() == True:
 			quit_menu = gtk.MenuItem(_("Quit"))
 			quit_menu.connect("activate", lambda q: gtk.main_quit())
