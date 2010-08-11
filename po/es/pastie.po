@@ -69,9 +69,8 @@ msgid "Misc"
 msgstr "Misceláneas"
 
 #: ../pastielib/preferences.py:91
-#, fuzzy
 msgid "Show 'preferences' on menu"
-msgstr "Mostrar 'salir' en el menú"
+msgstr "Mostrar 'preferencias' en el menú"
 
 #: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
