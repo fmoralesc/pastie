@@ -35,7 +35,7 @@ msgstr "עריכת לוח הגזירים"
 
 #: ../pastielib/protector.py:214
 msgid "Remove current"
-msgstr ""
+msgstr "הסרת הנוכחי"
 
 #: ../pastielib/protector.py:217
 msgid "Clean history"
@@ -46,9 +46,8 @@ msgid "Nothing in history or clipboards"
 msgstr "אין שום דבר בהיסטוריה או בלוחות העריכה"
 
 #: ../pastielib/protector.py:224
-#, fuzzy
 msgid "Preferences"
-msgstr "העדפות Pastie"
+msgstr "העדפות"
 
 #: ../pastielib/protector.py:228
 msgid "Quit"
@@ -71,9 +70,8 @@ msgid "Misc"
 msgstr "שונות"
 
 #: ../pastielib/preferences.py:91
-#, fuzzy
 msgid "Show 'preferences' on menu"
-msgstr "הצגת 'יציאה' בתפריט"
+msgstr "הצגת ׳העדפות׳ בתפריט"
 
 #: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
