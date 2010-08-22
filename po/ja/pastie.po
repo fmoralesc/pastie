@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Marisol Barrios <marisol.barrios@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
@@ -45,7 +45,6 @@ msgid "Nothing in history or clipboards"
 msgstr "歴史とクリップボードが空間"
 
 #: ../pastielib/protector.py:224
-#, fuzzy
 msgid "Preferences"
 msgstr "選択"
 
@@ -70,9 +69,8 @@ msgid "Misc"
 msgstr "その他"
 
 #: ../pastielib/preferences.py:91
-#, fuzzy
 msgid "Show 'preferences' on menu"
-msgstr "メニューで「終了」を示す"
+msgstr "メニューで「選択」を示す"
 
 #: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
