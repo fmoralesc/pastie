@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Martin Lukeš <martin.meridius@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-11 17:15-0400\n"
+"PO-Revision-Date: 2010-08-22 14:03+0200\n"
+"Last-Translator: Martin Lukeš <martin.meridius@gmail.com>\n"
+"Language-Team: Czech <diskuze@l10n.cz>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Virtaal 0.6.1\n"
+
+#: ../pastielib/edit_clipboard.py:27
+msgid "Editing clipboard"
+msgstr "Úprava obsahu schránky"
+
+#: ../pastielib/edit_clipboard.py:57
+msgid "_Replace"
+msgstr "_Nahradit"
+
+#: ../pastielib/edit_clipboard.py:57
+msgid "R"
+msgstr "N"
+
+#: ../pastielib/protector.py:209
+msgid "Edit clipboard"
+msgstr "Upravit schránku"
+
+#: ../pastielib/protector.py:214
+msgid "Remove current"
+msgstr "Odstranit aktuální"
+
+#: ../pastielib/protector.py:217
+msgid "Clean history"
+msgstr "Vymazat historii"
+
+#: ../pastielib/protector.py:221
+msgid "Nothing in history or clipboards"
+msgstr "Historie i schránka jsou prázdné"
+
+#: ../pastielib/protector.py:224
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: ../pastielib/protector.py:228
+msgid "Quit"
+msgstr "Ukončit"
+
+#: ../pastielib/preferences.py:44
+msgid "Pastie preferences"
+msgstr "Předvolby Pastie"
+
+#: ../pastielib/preferences.py:61
+msgid "History size"
+msgstr "Velikost historie"
+
+#: ../pastielib/preferences.py:74
+msgid "Menu history entries length"
+msgstr "Délka záznamu v nabídce historie"
+
+#: ../pastielib/preferences.py:87
+msgid "Misc"
+msgstr "Ostatní"
+
+#: ../pastielib/preferences.py:91
+msgid "Show 'preferences' on menu"
+msgstr "Zobrazovat v nabídce \"Předvolby\""
+
+#: ../pastielib/preferences.py:99
+msgid "Show 'quit' on menu"
+msgstr "Zobrazovat v nabídce \"Ukončit\""
+
+#: ../pastielib/history.py:109
+msgid "more"
+msgstr "více"
