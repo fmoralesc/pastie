@@ -221,7 +221,7 @@ class ClipboardProtector(object):
 			nothing_to_show_menu = gtk.MenuItem(_("Nothing in history or clipboards"))
 			menu.append(nothing_to_show_menu)
 		if prefs.get_show_prefs() == True:
-			prefs_menu = gtk.MenuItem(_("Preferences" + u'\u2026'))
+			prefs_menu = gtk.MenuItem(_("Preferences") + u'\u2026')
 			prefs_menu.connect("activate", self.create_prefs_dialog)
 			menu.append(prefs_menu)
 		if prefs.get_show_quit() == True:
