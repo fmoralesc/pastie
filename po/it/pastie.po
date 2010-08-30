@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Luca Marra <luca@facciocose.it>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
@@ -22,11 +22,11 @@ msgstr "Modifica appunti"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr ""
+msgstr "_Sostituisci"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #: ../pastielib/protector.py:209
 msgid "Edit clipboard"
@@ -42,12 +42,11 @@ msgstr "Cancella cronologia"
 
 #: ../pastielib/protector.py:221
 msgid "Nothing in history or clipboards"
-msgstr ""
+msgstr "Appunti vuoti"
 
 #: ../pastielib/protector.py:224
-#, fuzzy
 msgid "Preferences"
-msgstr "Preferenze di Pastie"
+msgstr "Preferenze"
 
 #: ../pastielib/protector.py:228
 msgid "Quit"
@@ -70,9 +69,8 @@ msgid "Misc"
 msgstr "Altro"
 
 #: ../pastielib/preferences.py:91
-#, fuzzy
 msgid "Show 'preferences' on menu"
-msgstr "Mostra 'Esci' nel menu"
+msgstr "Mostra 'Preferenze' nel menu"
 
 #: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
