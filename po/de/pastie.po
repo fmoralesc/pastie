@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 4.X\n"
@@ -21,11 +21,11 @@ msgstr "Zwischenablage bearbeiten"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr ""
+msgstr "_Ersetzen"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr ""
+msgstr "E"
 
 #: ../pastielib/protector.py:209
 msgid "Edit clipboard"
@@ -33,7 +33,7 @@ msgstr "Zwischenablage bearbeiten"
 
 #: ../pastielib/protector.py:214
 msgid "Remove current"
-msgstr ""
+msgstr "Entferne aktuellen Eintrag"
 
 #: ../pastielib/protector.py:217
 msgid "Clean history"
@@ -41,12 +41,11 @@ msgstr "Verlauf leeren"
 
 #: ../pastielib/protector.py:221
 msgid "Nothing in history or clipboards"
-msgstr ""
+msgstr "Der Verlauf ist leer"
 
 #: ../pastielib/protector.py:224
-#, fuzzy
 msgid "Preferences"
-msgstr "Pastie Einstellungen"
+msgstr "Einstellungen"
 
 #: ../pastielib/protector.py:228
 msgid "Quit"
@@ -69,9 +68,8 @@ msgid "Misc"
 msgstr "Diverse Einstellungen"
 
 #: ../pastielib/preferences.py:91
-#, fuzzy
 msgid "Show 'preferences' on menu"
-msgstr "Zeige \"Beenden\" im Menu"
+msgstr "Zeige Einstellung als Menupunkt"
 
 #: ../pastielib/preferences.py:99
 msgid "Show 'quit' on menu"
@@ -79,4 +77,4 @@ msgstr "Zeige \"Beenden\" im Menu"
 
 #: ../pastielib/history.py:109
 msgid "more"
-msgstr ""
+msgstr "Mehr"
