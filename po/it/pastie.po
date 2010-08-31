@@ -34,7 +34,7 @@ msgstr "Modifica appunti"
 
 #: ../pastielib/protector.py:214
 msgid "Remove current"
-msgstr ""
+msgstr "Rimuovi elemento selezionato"
 
 #: ../pastielib/protector.py:217
 msgid "Clean history"
@@ -78,4 +78,4 @@ msgstr "Mostra 'Esci' nel menu"
 
 #: ../pastielib/history.py:109
 msgid "more"
-msgstr ""
+msgstr "in più"
