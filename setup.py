@@ -22,6 +22,7 @@ setup(
 		('/usr/share/applications', ['pastie.desktop']),
 		('/etc/xdg/autostart', ['pastie-startup.desktop']),
 		('/usr/share/gconf/schemas', ['pastie.schemas']),
+		('/usr/share/locale/cs/LC_MESSAGES', ['po/cs/pastie.mo']),
 		('/usr/share/locale/de/LC_MESSAGES', ['po/de/pastie.mo']),
 		('/usr/share/locale/es/LC_MESSAGES', ['po/es/pastie.mo']),
 		('/usr/share/locale/ja/LC_MESSAGES', ['po/ja/pastie.mo']),
