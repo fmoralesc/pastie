@@ -18,6 +18,7 @@ import gobject
 import gtk
 import gtk.gdk
 import appindicator
+import keybinder
 import os.path
 import xml.etree.ElementTree as tree
 from xml.parsers.expat import ExpatError
@@ -27,6 +28,7 @@ import hashlib
 import pastielib.history as history
 import pastielib.edit_clipboard as edit
 import pastielib.preferences as prefs
+import pastielib.selection_dialog as seldiag
 
 class ClipboardProtector(object):
 	def __init__(self):
@@ -75,6 +77,9 @@ class ClipboardProtector(object):
 		self.clipboard.connect("owner-change", self.check)
 		# run an auxiloary loop for special cases (e.g., gvim)
 		gobject.timeout_add(500, self.check_specials)
+
+		s_dialog = seldiag.SelectionDialog(self)
+		keybinder.bind("<Control><Shift>c", lambda: s_dialog.show())
 
 	# returns a list of history items from a XML file.
 	def recover_history(self, input_file="~/.clipboard_history"):

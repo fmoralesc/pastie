@@ -33,6 +33,9 @@ class HistoryMenuItem(gobject.GObject):
 	def get_label(self):
 		pass
 
+	def get_long_label(self):
+		pass
+
 	# set payload as current clipboard content.
 	# subclasses must extend this.
 	def set_as_current(self, event=None):
@@ -51,6 +54,9 @@ class TextHistoryMenuItem(HistoryMenuItem):
 		l = l.replace('_', '__')
 		
 		return l
+
+	def get_long_label(self):
+		return self.payload[:69] + u'\u2026'
 
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
@@ -146,6 +152,9 @@ class FileHistoryMenuItem(HistoryMenuItem):
 		l = l.replace("_", "__")
 		return l
 
+	def get_long_label(self):
+		return self.get_label()
+
 	def set_as_current(self, event=None):
 		def path_get(clipboard, selectiondata, info, path):
 			selectiondata.set_text(path)
@@ -179,6 +188,9 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 		l = u"\u25A3 [" + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
 		return l
 
+	def get_long_label(self):
+		return self.get_label()
+
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
 		gtk.clipboard_get().set_image(self.pixbuf)
@@ -203,10 +215,7 @@ class HistoryMenuItemCollector(gobject.GObject):
 
 	# returns the number of members of collection
 	def __len__(self):
-		count = 0
-		for i in self:
-			count =+ 1
-		return count
+		return len(self.data)
 	
 	def __iter__(self):
 		return self
