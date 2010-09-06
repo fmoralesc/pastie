@@ -63,10 +63,11 @@ class SelectionDialog():
 		self.window.hide()
 
 	def hide_when_unfocused(self):
-		focus = self.window.get_property("has-toplevel-focus")
-		if focus == False:
-			self.hide()
-		return True
+		if self.window.get_property("visible") == True:
+			focus = self.window.get_property("has-toplevel-focus")
+			if focus == False:
+				self.hide()
+			return True
 
 	def update_labels(self):
 		self.arrow_left.set_markup('<span size="9000" background="grey" foreground="white">'+u"\u21e7"+'</span>')
@@ -78,6 +79,7 @@ class SelectionDialog():
 
 	def handle_keypresses(self, widget, data=None):
 		key = gtk.gdk.keyval_name(data.keyval)
+		state = data.state
 
 		if key == "Escape":
 			self.hide()
