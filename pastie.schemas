@@ -41,7 +41,7 @@
       <applyto>/apps/pastie/prefs/show_preferences_on_menu</applyto>
       <owner>pastie</owner>
       <type>bool</type>
-      <default>false</default>
+      <default>true</default>
       <gettext_domain>pastie</gettext_domain>
       <locale name="C">
         <short>Show "preferences" menu item</short>
