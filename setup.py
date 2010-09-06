@@ -16,7 +16,7 @@ setup(
 	author_email = "hel.sheep@gmail.com",
 	url = "http://github.com/fmoralesc/pastie/",
 	license = "GNU GPL v3",
-	version = "0.5.5",
+	version = "0.6",
 	scripts = ["pastie"],
 	data_files=[
 		('/usr/share/applications', ['pastie.desktop']),
@@ -27,6 +27,7 @@ setup(
 		('/usr/share/locale/es/LC_MESSAGES', ['po/es/pastie.mo']),
 		('/usr/share/locale/ja/LC_MESSAGES', ['po/ja/pastie.mo']),
 		('/usr/share/locale/ru/LC_MESSAGES', ['po/ru/pastie.mo']),
+		('/usr/share/locale/pt_BR/LC_MESSAGES', ['po/pt_BR/pastie.mo']),
 		('/usr/share/locale/uk/LC_MESSAGES', ['po/uk/pastie.mo']),
 		('/usr/share/locale/it/LC_MESSAGES', ['po/it/pastie.mo']),
 		('/usr/share/locale/fi/LC_MESSAGES', ['po/fi/pastie.mo']),
