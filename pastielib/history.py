@@ -73,7 +73,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 					l = l + new_e_char
 			if start > 0: # the string beggining doesn't match the source beginning
 				l = u"\u2026" + l[1:]
-			if end < len(source_string): # the string end doesn't match the source end
+			if end < len(source_string)-1: # the string end doesn't match the source end
 				l = l[:len(l)-1] + u"\u2026"
 			return l
 
