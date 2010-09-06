@@ -33,7 +33,7 @@ class HistoryMenuItem(gobject.GObject):
 	def get_label(self):
 		pass
 
-	def get_long_label(self):
+	def get_long_label(self, search=None):
 		pass
 
 	# set payload as current clipboard content.
@@ -55,8 +55,37 @@ class TextHistoryMenuItem(HistoryMenuItem):
 		
 		return l
 
-	def get_long_label(self):
-		return self.payload[:69] + u'\u2026'
+	def get_long_label(self, search=None):
+		def fill_string_around(source_string, center_string, maxsize):
+			l = center_string
+			start = source_string.find(l)
+			end = source_string.find(l) + len(l) -1
+			if len(source_string) < maxsize:
+				maxsize = len(source_string)
+			while len(l) < maxsize:
+				if start > 0: # we stop adding at the beggining if we get to the beggining of the source
+					start = start-1
+					new_s_char = source_string[start]
+					l = new_s_char + l
+				if end < len(source_string) - 1: # we stop adding at the end if we get to the end of the source
+					end = end + 1
+					new_e_char = source_string[end]
+					l = l + new_e_char
+			if start > 0: # the string beggining doesn't match the source beginning
+				l = u"\u2026" + l[1:]
+			if end < len(source_string): # the string end doesn't match the source end
+				l = l[:len(l)-1] + u"\u2026"
+			return l
+
+		if search != None:
+			l = fill_string_around(self.payload, search, 70)
+			return l
+		else:
+			if len(self.payload) >= 70:
+				l = self.payload[:69] + u'\u2026'
+			else:
+				l = self.payload
+		return l
 
 	def set_as_current(self, event=None):
 		HistoryMenuItem.set_as_current(self, event)
@@ -152,7 +181,7 @@ class FileHistoryMenuItem(HistoryMenuItem):
 		l = l.replace("_", "__")
 		return l
 
-	def get_long_label(self):
+	def get_long_label(self, search=None):
 		return self.get_label()
 
 	def set_as_current(self, event=None):
@@ -188,7 +217,7 @@ class ImageHistoryMenuItem(HistoryMenuItem):
 		l = u"\u25A3 [" + str(self.pixbuf.props.width) + u"\u2715" + str(self.pixbuf.props.height) + "]"
 		return l
 
-	def get_long_label(self):
+	def get_long_label(self, search=None):
 		return self.get_label()
 
 	def set_as_current(self, event=None):
@@ -236,10 +265,8 @@ class HistoryMenuItemCollector(gobject.GObject):
 		
 	# print a representation of the data. for debug purposes only.
 	def repr(self):
-		count = 0
 		for i in self:
 			print i
-			count =+ 1
 
 	# check if item exists in collection by content comparison.
 	def exists(self,data):
@@ -254,8 +281,21 @@ class HistoryMenuItemCollector(gobject.GObject):
 		for item in self:
 			if item.payload == data.payload:
 				return count
-			count =+ 1
+			count = count + 1
 		return -1
+
+	def find(self, data):
+		indexes = []
+		count = 0
+		for item in self:
+			if isinstance(item, TextHistoryMenuItem):
+				if item.payload.count(data) > 0:
+					indexes.append(count)
+			if isinstance(item, FileHistoryMenuItem):
+				if item.payload.count(data) > 0:
+					indexes.append(count)
+			count = count + 1
+		return indexes
 
 	# adds a member to the collection
 	def add(self,data):
