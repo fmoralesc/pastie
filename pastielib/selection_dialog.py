@@ -44,6 +44,7 @@ class SelectionDialog():
 		self.window.set_focus_chain((self.search,))
 	
 		self.window.connect("key-press-event", self.handle_keypresses)
+		gobject.timeout_add(100, self.hide_when_unfocused)
 	
 	def show(self):
 		gobject.timeout_add(100, self.present)
@@ -60,6 +61,12 @@ class SelectionDialog():
 	def hide(self):
 		self.index = 0
 		self.window.hide()
+
+	def hide_when_unfocused(self):
+		focus = self.window.get_property("has-toplevel-focus")
+		if focus == False:
+			self.hide()
+		return True
 
 	def update_labels(self):
 		self.arrow_left.set_markup('<span size="9000" background="grey" foreground="white">'+u"\u21e7"+'</span>')
