@@ -16,7 +16,7 @@ setup(
 	author_email = "hel.sheep@gmail.com",
 	url = "http://github.com/fmoralesc/pastie/",
 	license = "GNU GPL v3",
-	version = "0.6",
+	version = "0.6.1",
 	scripts = ["pastie"],
 	data_files=[
 		('/usr/share/applications', ['pastie.desktop']),
