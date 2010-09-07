@@ -46,6 +46,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
 		length = prefs.get_item_length()
 		l = unicode(self.payload[:length+length]).strip(' ')
+		
 		if len(l) > length:
 			l = l[:length-1] + u'\u2026'
 
@@ -71,6 +72,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 					end = end + 1
 					new_e_char = source_string[end]
 					l = l + new_e_char
+
 			if start > 0: # the string beggining doesn't match the source beginning
 				l = u"\u2026" + l[1:]
 			if end < len(source_string)-1: # the string end doesn't match the source end
@@ -85,6 +87,7 @@ class TextHistoryMenuItem(HistoryMenuItem):
 				l = self.payload[:69] + u'\u2026'
 			else:
 				l = self.payload
+		
 		return l
 
 	def set_as_current(self, event=None):
@@ -112,8 +115,10 @@ class FileHistoryMenuItem(HistoryMenuItem):
 				second_remainder_size = len(pair[1]) - size_of_second_cut
 
 				first_extreme_size = first_remainder_size/2
+				
 				if first_extreme_size == 0:
 					first_extreme_size = 1
+				
 				second_extreme_size = second_remainder_size/2
 				if second_extreme_size == 0:
 					second_extreme_size = 1
@@ -129,12 +134,15 @@ class FileHistoryMenuItem(HistoryMenuItem):
 				preliminary_lenght = len(first) + len(second)
 				if preliminary_lenght > constraint:
 					if len(first) > len(second):
-						first = pair[0][:first_extreme_size] + u"\u2026" + pair[0][first_extreme_size+size_of_first_cut+1:]
+						first = pair[0][:first_extreme_size] + u"\u2026" + pair[0][first_extreme_size + \
+						size_of_first_cut + 1:]
 					elif len(second) > len(first):
-						second = pair[1][:second_extreme_size] + u"\u2026" + pair[1][second_extreme_size+size_of_second_cut+1:]
+						second = pair[1][:second_extreme_size] + u"\u2026" + pair[1][second_extreme_size + \
+						size_of_second_cut + 1:]
 
 				return first, second
-			else:
+			
+			else: # we don't have to shorten the pair
 				return pair
 
 		lines = self.payload.split("\n")
@@ -284,6 +292,7 @@ class HistoryMenuItemCollector(gobject.GObject):
 			count = count + 1
 		return -1
 
+	# returns a list of the indexes in self.data where the data substring can be found
 	def find(self, data):
 		indexes = []
 		count = 0
@@ -338,12 +347,15 @@ class HistoryMenuItemCollector(gobject.GObject):
 		
 		for i in self.data:
 			del i
+		
 		self.data = []
 		self.data.append(selected_data)
+		
 		for item in head:
 			self.data.append(item)
 		for item in tail:
 			self.data.append(item)
+		
 		self.emit("data-change", len(self))
 	
 	# clear the history
@@ -356,12 +368,15 @@ class HistoryMenuItemCollector(gobject.GObject):
 			for i in self.data[1:]:
 				del i
 			self.data = [self.data[0]]
+		
 		self.emit("data-change", len(self))
 
 	def delete_top(self):
 		self.data = self.data[1:]
+		
 		if len(self) > 0:
 			self.select(None, self.data[0])
+		
 		self.emit("data-change", len(self))
 	
 	def replace_top(self, data):
@@ -371,10 +386,13 @@ class HistoryMenuItemCollector(gobject.GObject):
 
 	def adjust_maxlen(self, gconf=None, key=None, value=None, d=None):
 		self.maxlen = prefs.get_history_size()
+
 		for i in self.data[self.maxlen:]:
 			del i
+		
 		self.data = self.data[:self.maxlen]
 		self.emit("length-adjusted", self.maxlen)
+
 
 def new_signal(label, class_name, flag=gobject.SIGNAL_ACTION, ret=None, args=(int,)):
 	gobject.signal_new(label, class_name, flag, ret, args)

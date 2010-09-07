@@ -17,6 +17,7 @@
 import gobject
 import gtk
 import gtk.gdk
+
 import appindicator
 import keybinder
 import os.path
@@ -80,38 +81,46 @@ class ClipboardProtector(object):
 		# run an auxiloary loop for special cases (e.g., gvim)
 		gobject.timeout_add(500, self.check_specials)
 
+		# create the selection dialog and set the keyboard shortcut for it
 		self.s_dialog = seldiag.SelectionDialog(self)
 		self.prev_sel_dialog_key = prefs.get_sel_dialog_key()
 		self.change_s_dialog_key()
 
+		# set the preferences dialog's keyboard shortcut
 		self.prev_prefs_dialog_key = prefs.get_prefs_dialog_key()
 		self.change_prefs_dialog_key()
 
+	# change the binding of the selection dialog
 	def change_s_dialog_key(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
 		try:
 			keybinder.unbind(self.prev_sel_dialog_key)
 		except:
 			pass
+
 		keybinder.bind(prefs.get_sel_dialog_key(), lambda: self.s_dialog.show())
 		self.prev_sel_dialog_key = prefs.get_sel_dialog_key()
 
+	# change the binding of the preferences dialog
 	def change_prefs_dialog_key(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
 		try:
 			keybinder.unbind(self.prev_prefs_dialog_key)
 		except:
 			pass
+
 		keybinder.bind(prefs.get_prefs_dialog_key(), lambda: prefs.PreferencesDialog())
 		self.prev_prefs_dialog_key = prefs.get_prefs_dialog_key()
 
 	# returns a list of history items from a XML file.
 	def recover_history(self, input_file="~/.clipboard_history"):
 		tmp_list = []
+
 		try:
 			history_tree = tree.parse(os.path.expanduser(input_file))
 		except IOError: # file doesn't exist
 			return tmp_list
 		except ExpatError: # file is empty or malformed
 			return tmp_list
+		
 		for item in history_tree.findall("item"):
 			if item.get("type") == "text":
 				history_item = history.TextHistoryMenuItem(item.text)
@@ -123,16 +132,20 @@ class ClipboardProtector(object):
 				width = int(item.get("width"))
 				height = int(item.get("height"))
 				rowstride = int(item.get("rowstride"))
-				pixbuf = gtk.gdk.pixbuf_new_from_data(data, gtk.gdk.COLORSPACE_RGB, has_alpha, 8, width, height, rowstride)
+				pixbuf = gtk.gdk.pixbuf_new_from_data(data, gtk.gdk.COLORSPACE_RGB, \
+				has_alpha, 8, width, height, rowstride)
 				history_item = history.ImageHistoryMenuItem(pixbuf)
 			else:
 				history_item = history.TextHistoryMenuItem(item.text)
+
 			tmp_list.append(history_item)
+
 		return tmp_list
 	
 	# saves the clipboard history to a XML file. called on program termination.
 	def save_history(self, output_file="~/.clipboard_history"):
 		history_tree_root = tree.Element("clipboard")
+		
 		for item in self.history.data:
 			history_tree_item = tree.SubElement(history_tree_root, "item")
 			history_tree_item.set("id", hashlib.md5(item.payload).hexdigest())
@@ -145,6 +158,7 @@ class ClipboardProtector(object):
 				item_type = "image"
 			else:
 				item_type = "text"
+			
 			history_tree_item.set("type", item_type)
 			
 			if item_type == "image":
@@ -161,7 +175,6 @@ class ClipboardProtector(object):
 
 	# erase the clipboard history. the current contents of the clipoard will remain.
 	def clean_history(self, event=None):
-#		self.clipboard.clear()
 		self.history.empty(full=True)
 		self.check()
 		self.save_history()
@@ -182,9 +195,9 @@ class ClipboardProtector(object):
 	# check clipboard contents.
 	def check(self, clipboard=None, event=None):
 		if not self.clipboard.wait_for_targets():
-			# some programs (JEdit) don't set the targets, but still set the text
+			# some programs (JEdit) don't set the targets, but still set the text...
 			no_targetted_text = self.clipboard.wait_for_text()
-			if no_targetted_text != None:
+			if no_targetted_text != None: # ... if that's the case, we add it
 				self.history.add(history.TextHistoryMenuItem(no_targetted_text))
 				self.save_history()
 			else:
@@ -225,6 +238,7 @@ class ClipboardProtector(object):
 	# create and show the menu
 	def update_menu(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
 		menu = gtk.Menu()
+
 		if len(self.history) > 0:
 			for i in self.history:
 				label = i.get_label()
@@ -247,14 +261,17 @@ class ClipboardProtector(object):
 		else:
 			nothing_to_show_menu = gtk.MenuItem(_("Nothing in history or clipboards"))
 			menu.append(nothing_to_show_menu)
+		
 		if prefs.get_show_prefs() == True:
 			prefs_menu = gtk.MenuItem(_("Preferences") + u'\u2026')
 			prefs_menu.connect("activate", self.create_prefs_dialog)
 			menu.append(prefs_menu)
+		
 		if prefs.get_show_quit() == True:
 			quit_menu = gtk.MenuItem(_("Quit"))
 			quit_menu.connect("activate", lambda q: gtk.main_quit())
 			menu.append(quit_menu)
+		
 		menu.show_all()
 		# attach this menu to the indicator
 		self.indicator.set_menu(menu)
