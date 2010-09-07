@@ -36,7 +36,7 @@
         <long>Show "quit" menu item.</long>
       </locale>
     </schema>
-     <schema>
+    <schema>
       <key>/schemas/apps/pastie/prefs/show_preferences_on_menu</key>
       <applyto>/apps/pastie/prefs/show_preferences_on_menu</applyto>
       <owner>pastie</owner>
@@ -46,6 +46,30 @@
       <locale name="C">
         <short>Show "preferences" menu item</short>
         <long>Show "Preferences..." menu item.</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/pastie/prefs/prefs_dialog_key</key>
+      <applyto>/apps/pastie/prefs/prefs_dialog_key</applyto>
+      <owner>pastie</owner>
+      <type>string</type>
+      <default>&lt;Control&gt;&lt;Alt&gt;P</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Preferences dialog keyboard shortcut</short>
+        <long>Preferences dialog keyboard shortcut</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/pastie/prefs/sel_dialog_key</key>
+      <applyto>/apps/pastie/prefs/sel_dialog_key</applyto>
+      <owner>pastie</owner>
+      <type>string</type>
+      <default>&lt;Control&gt;&lt;Shift&gt;C</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Selection dialog keyboard shortcut</short>
+        <long>Selection dialog keyboard shortcut</long>
       </locale>
     </schema>
  </schemalist>

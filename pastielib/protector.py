@@ -72,14 +72,36 @@ class ClipboardProtector(object):
 		self.gconf_client.notify_add('show_preferences_on_menu', self.update_menu)
 		self.gconf_client.notify_add('item_length', self.update_menu)
 		self.gconf_client.notify_add('history_size', self.history.adjust_maxlen)
+		self.gconf_client.notify_add('sel_dialog_key', self.change_s_dialog_key)
+		self.gconf_client.notify_add('prefs_dialog_key', self.change_prefs_dialog_key)
 		
 		# check clipboard changes on owner-change event
 		self.clipboard.connect("owner-change", self.check)
 		# run an auxiloary loop for special cases (e.g., gvim)
 		gobject.timeout_add(500, self.check_specials)
 
-		s_dialog = seldiag.SelectionDialog(self)
-		keybinder.bind("<Control><Shift>c", lambda: s_dialog.show())
+		self.s_dialog = seldiag.SelectionDialog(self)
+		self.prev_sel_dialog_key = prefs.get_sel_dialog_key()
+		self.change_s_dialog_key()
+
+		self.prev_prefs_dialog_key = prefs.get_prefs_dialog_key()
+		self.change_prefs_dialog_key()
+
+	def change_s_dialog_key(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
+		try:
+			keybinder.unbind(self.prev_sel_dialog_key)
+		except:
+			pass
+		keybinder.bind(prefs.get_sel_dialog_key(), lambda: self.s_dialog.show())
+		self.prev_sel_dialog_key = prefs.get_sel_dialog_key()
+
+	def change_prefs_dialog_key(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
+		try:
+			keybinder.unbind(self.prev_prefs_dialog_key)
+		except:
+			pass
+		keybinder.bind(prefs.get_prefs_dialog_key(), lambda: prefs.PreferencesDialog())
+		self.prev_prefs_dialog_key = prefs.get_prefs_dialog_key()
 
 	# returns a list of history items from a XML file.
 	def recover_history(self, input_file="~/.clipboard_history"):

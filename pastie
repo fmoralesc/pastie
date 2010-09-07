@@ -51,9 +51,6 @@ if __name__ == "__main__":
 	# load translations
 	gettext.install("pastie", "/usr/share/locale")
 		
-	# keybind preferences dialog
-	keybinder.bind("<Control><Alt>P", lambda : prefs.PreferencesDialog())
-
 	# create clipboard protector (this is the core of the program)
 	clipboard_protector = protector.ClipboardProtector()
 
