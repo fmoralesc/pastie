@@ -2,12 +2,12 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Luca Marra <luca@facciocose.it>, 2010.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-11 17:15-0400\n"
+"POT-Creation-Date: 2010-09-07 16:58-0400\n"
 "PO-Revision-Date: 2010-06-19 19:12+0200\n"
 "Last-Translator: Luca Marra <luca@facciocose.it>\n"
 "Language-Team: Italian\n"
@@ -28,54 +28,95 @@ msgstr "_Sostituisci"
 msgid "R"
 msgstr "R"
 
-#: ../pastielib/protector.py:209
+#: ../pastielib/protector.py:280
 msgid "Edit clipboard"
 msgstr "Modifica appunti"
 
-#: ../pastielib/protector.py:214
+#: ../pastielib/protector.py:285
 msgid "Remove current"
 msgstr "Rimuovi elemento selezionato"
 
-#: ../pastielib/protector.py:217
+#: ../pastielib/protector.py:288
 msgid "Clean history"
 msgstr "Cancella cronologia"
 
-#: ../pastielib/protector.py:221
+#: ../pastielib/protector.py:292
 msgid "Nothing in history or clipboards"
 msgstr "Appunti vuoti"
 
-#: ../pastielib/protector.py:224
+#: ../pastielib/protector.py:296
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: ../pastielib/protector.py:228
+#: ../pastielib/protector.py:301
 msgid "Quit"
 msgstr "Esci"
 
-#: ../pastielib/preferences.py:44
+#: ../pastielib/preferences.py:88
 msgid "Pastie preferences"
 msgstr "Preferenze di Pastie"
 
-#: ../pastielib/preferences.py:61
+#: ../pastielib/preferences.py:102
+msgid "General"
+msgstr ""
+
+#: ../pastielib/preferences.py:106
 msgid "History size"
 msgstr "Dimensione cronologia"
 
-#: ../pastielib/preferences.py:74
+#: ../pastielib/preferences.py:117
+msgid "Primary selection"
+msgstr ""
+
+#: ../pastielib/preferences.py:123
+msgid "Use primary selection"
+msgstr ""
+
+#: ../pastielib/preferences.py:131
+#, fuzzy
+msgid "Synchronize clipboards"
+msgstr "Modifica appunti"
+
+#: ../pastielib/preferences.py:143
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: ../pastielib/preferences.py:151
+msgid "Selection dialog"
+msgstr ""
+
+#: ../pastielib/preferences.py:161
+#, fuzzy
+msgid "Preferences dialog"
+msgstr "Preferenze"
+
+#: ../pastielib/preferences.py:172
+msgid "Interface"
+msgstr ""
+
+#: ../pastielib/preferences.py:174
+msgid "Menu"
+msgstr ""
+
+#: ../pastielib/preferences.py:183
 msgid "Menu history entries length"
 msgstr "Lunghezza elementi del menu"
 
-#: ../pastielib/preferences.py:87
-msgid "Misc"
-msgstr "Altro"
+#: ../pastielib/preferences.py:194
+msgid "Special menu items"
+msgstr ""
 
-#: ../pastielib/preferences.py:91
+#: ../pastielib/preferences.py:198
 msgid "Show 'preferences' on menu"
 msgstr "Mostra 'Preferenze' nel menu"
 
-#: ../pastielib/preferences.py:99
+#: ../pastielib/preferences.py:206
 msgid "Show 'quit' on menu"
 msgstr "Mostra 'Esci' nel menu"
 
-#: ../pastielib/history.py:109
+#: ../pastielib/history.py:157
 msgid "more"
 msgstr "in più"
+
+#~ msgid "Misc"
+#~ msgstr "Altro"
