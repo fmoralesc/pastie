@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-11 17:15-0400\n"
+"POT-Creation-Date: 2010-09-07 00:38-0400\n"
 "PO-Revision-Date: 2010-08-01 00:38+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Gezer (Hebrew)\n"
@@ -29,54 +29,86 @@ msgstr "ה_חלפה"
 msgid "R"
 msgstr "ח"
 
-#: ../pastielib/protector.py:209
+#: ../pastielib/protector.py:236
 msgid "Edit clipboard"
 msgstr "עריכת לוח הגזירים"
 
-#: ../pastielib/protector.py:214
+#: ../pastielib/protector.py:241
 msgid "Remove current"
 msgstr "הסרת הנוכחי"
 
-#: ../pastielib/protector.py:217
+#: ../pastielib/protector.py:244
 msgid "Clean history"
 msgstr "ניקוי ההיסטוריה"
 
-#: ../pastielib/protector.py:221
+#: ../pastielib/protector.py:248
 msgid "Nothing in history or clipboards"
 msgstr "אין שום דבר בהיסטוריה או בלוחות העריכה"
 
-#: ../pastielib/protector.py:224
+#: ../pastielib/protector.py:251
 msgid "Preferences"
 msgstr "העדפות"
 
-#: ../pastielib/protector.py:228
+#: ../pastielib/protector.py:255
 msgid "Quit"
 msgstr "יציאה"
 
-#: ../pastielib/preferences.py:44
+#: ../pastielib/preferences.py:76
 msgid "Pastie preferences"
 msgstr "העדפות Pastie"
 
-#: ../pastielib/preferences.py:61
+#: ../pastielib/preferences.py:90
+msgid "General"
+msgstr "כללי"
+
+#: ../pastielib/preferences.py:94
 msgid "History size"
 msgstr "גודל ההיסטוריה"
 
-#: ../pastielib/preferences.py:74
+#: ../pastielib/preferences.py:105
+msgid "Keyboard shortcuts"
+msgstr "קיצורי מקלדת"
+
+#: ../pastielib/preferences.py:113
+msgid "Selection dialog"
+msgstr "דו־שיח לבחירה"
+
+#: ../pastielib/preferences.py:123
+msgid "Preferences dialog"
+msgstr "דו־שיח ההעדפות"
+
+#: ../pastielib/preferences.py:134
+msgid "Interface"
+msgstr "מנשק"
+
+#: ../pastielib/preferences.py:136
+msgid "Menu"
+msgstr "תפריט"
+
+#: ../pastielib/preferences.py:145
 msgid "Menu history entries length"
 msgstr "אורך תפריט הרשומות ההיסטוריות"
 
-#: ../pastielib/preferences.py:87
-msgid "Misc"
-msgstr "שונות"
+#: ../pastielib/preferences.py:156
+msgid "Special menu items"
+msgstr "פריטים מיוחדים בתפריט"
 
-#: ../pastielib/preferences.py:91
+#: ../pastielib/preferences.py:160
 msgid "Show 'preferences' on menu"
 msgstr "הצגת ׳העדפות׳ בתפריט"
 
-#: ../pastielib/preferences.py:99
+#: ../pastielib/preferences.py:168
 msgid "Show 'quit' on menu"
 msgstr "הצגת 'יציאה' בתפריט"
 
-#: ../pastielib/history.py:109
+#: ../pastielib/history.py:144
 msgid "more"
 msgstr "עוד"
+
+#. clear searches without results
+#: ../pastielib/selection_dialog.py:112 ../pastielib/selection_dialog.py:134
+msgid "Not found!"
+msgstr "לא נמצא!"
+
+#~ msgid "Misc"
+#~ msgstr "שונות"

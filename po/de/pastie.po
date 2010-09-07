@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 4.X\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-11 17:15-0400\n"
+"POT-Creation-Date: 2010-09-07 00:38-0400\n"
 "PO-Revision-Date: 2010-06-22 21:29+0100\n"
 "Last-Translator: Frederik Hahne <frederik.hahne@googlemail.com>\n"
 "Language-Team: German Translation\n"
@@ -27,54 +27,86 @@ msgstr "_Ersetzen"
 msgid "R"
 msgstr "E"
 
-#: ../pastielib/protector.py:209
+#: ../pastielib/protector.py:236
 msgid "Edit clipboard"
 msgstr "Zwischenablage bearbeiten"
 
-#: ../pastielib/protector.py:214
+#: ../pastielib/protector.py:241
 msgid "Remove current"
 msgstr "Entferne aktuellen Eintrag"
 
-#: ../pastielib/protector.py:217
+#: ../pastielib/protector.py:244
 msgid "Clean history"
 msgstr "Verlauf leeren"
 
-#: ../pastielib/protector.py:221
+#: ../pastielib/protector.py:248
 msgid "Nothing in history or clipboards"
 msgstr "Der Verlauf ist leer"
 
-#: ../pastielib/protector.py:224
+#: ../pastielib/protector.py:251
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../pastielib/protector.py:228
+#: ../pastielib/protector.py:255
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../pastielib/preferences.py:44
+#: ../pastielib/preferences.py:76
 msgid "Pastie preferences"
 msgstr "Pastie Einstellungen"
 
-#: ../pastielib/preferences.py:61
+#: ../pastielib/preferences.py:90
+msgid "General"
+msgstr "Allgemein"
+
+#: ../pastielib/preferences.py:94
 msgid "History size"
 msgstr "Größe des Verlaufs"
 
-#: ../pastielib/preferences.py:74
+#: ../pastielib/preferences.py:105
+msgid "Keyboard shortcuts"
+msgstr "Tastenkürzel"
+
+#: ../pastielib/preferences.py:113
+msgid "Selection dialog"
+msgstr "Auswahldialog"
+
+#: ../pastielib/preferences.py:123
+msgid "Preferences dialog"
+msgstr "Einstellungsdialog"
+
+#: ../pastielib/preferences.py:134
+msgid "Interface"
+msgstr "Oberfläche"
+
+#: ../pastielib/preferences.py:136
+msgid "Menu"
+msgstr "Menü"
+
+#: ../pastielib/preferences.py:145
 msgid "Menu history entries length"
 msgstr "Länge der Einträge im Verlauf"
 
-#: ../pastielib/preferences.py:87
-msgid "Misc"
-msgstr "Diverse Einstellungen"
+#: ../pastielib/preferences.py:156
+msgid "Special menu items"
+msgstr "Spezielle Menüpunkte"
 
-#: ../pastielib/preferences.py:91
+#: ../pastielib/preferences.py:160
 msgid "Show 'preferences' on menu"
 msgstr "Zeige Einstellung als Menupunkt"
 
-#: ../pastielib/preferences.py:99
+#: ../pastielib/preferences.py:168
 msgid "Show 'quit' on menu"
 msgstr "Zeige \"Beenden\" im Menu"
 
-#: ../pastielib/history.py:109
+#: ../pastielib/history.py:144
 msgid "more"
 msgstr "Mehr"
+
+#. clear searches without results
+#: ../pastielib/selection_dialog.py:112 ../pastielib/selection_dialog.py:134
+msgid "Not found!"
+msgstr "Nicht gefunden!"
+
+#~ msgid "Misc"
+#~ msgstr "Diverse Einstellungen"
