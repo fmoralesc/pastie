@@ -31,6 +31,18 @@ def set_pref(pref, value, value_type):
 	elif value_type == 'string':
 		gconf.client_get_default().set_string(path, value)
 
+def get_use_primary():
+	return get_pref('use_primary')
+
+def set_use_primary(value):
+	set_pref('use_primary', value, 'bool')
+
+def get_synch_primary():
+	return get_pref('synch_primary')
+
+def set_synch_primary(value):
+	set_pref('synch_primary', value, 'bool')
+
 def get_show_quit():
 	return get_pref('show_quit_on_menu')
 
@@ -102,6 +114,32 @@ class PreferencesDialog():
 		
 		main_prefs_box.pack_start(hist_size_pref_box, expand=False)
 
+		primary_frame = gtk.Frame(_("Primary selection"))
+		main_prefs_box.pack_start(primary_frame)
+		
+		primary_box = gtk.VBox()
+		primary_frame.add(primary_box)
+
+		use_primary_checkbutton = gtk.CheckButton(_("Use primary selection"))
+		if get_use_primary() == True:
+			use_primary_checkbutton.set_active(True)
+		else:
+			use_primary_checkbutton.set_active(False)
+		use_primary_checkbutton.connect("toggled", self.toggle_use_primary)
+		primary_box.pack_start(use_primary_checkbutton)
+
+		self.synch_primary_checkbutton = gtk.CheckButton(_("Synchronize clipboards"))
+		if get_use_primary() == True:
+			self.synch_primary_checkbutton.set_sensitive(True)
+		else:
+			self.synch_primary_checkbutton.set_sensitive(False)
+		if get_synch_primary() == True:
+			self.synch_primary_checkbutton.set_active(True)
+		else:
+			self.synch_primary_checkbutton.set_active(False)
+		self.synch_primary_checkbutton.connect("toggled", self.toggle_synch_primary)
+		primary_box.pack_end(self.synch_primary_checkbutton)
+
 		shortcuts_frame = gtk.Frame(_("Keyboard shortcuts"))
 		main_prefs_box.pack_start(shortcuts_frame)
 		shortcuts_table = gtk.Table(2,2)
@@ -134,7 +172,7 @@ class PreferencesDialog():
 		ntbk.append_page(interface_prefs_box, gtk.Label(_("Interface")))
 
 		menu_frame = gtk.Frame(_("Menu"))
-		interface_prefs_box.pack_start(menu_frame, expand=False)
+		interface_prefs_box.pack_start(menu_frame)
 
 		menu_box = gtk.VBox()
 		menu_box.set_border_width(3)
@@ -151,7 +189,7 @@ class PreferencesDialog():
 		self.item_length_pref_spin.connect("value-changed", self.change_item_length)
 		item_length_pref_box.pack_end(self.item_length_pref_spin)
 
-		menu_box.pack_start(item_length_pref_box)
+		menu_box.pack_start(item_length_pref_box, expand=False)
 
 		special_menuitems_frame = gtk.Frame(_("Special menu items"))
 		special_menuitems_box = gtk.VBox()
@@ -163,7 +201,7 @@ class PreferencesDialog():
 		else:
 			show_prefs_checkbutton.set_active(False)
 		show_prefs_checkbutton.connect("toggled", self.toggle_show_prefs)
-		special_menuitems_box.pack_start(show_prefs_checkbutton)
+		special_menuitems_box.pack_start(show_prefs_checkbutton, expand=False)
 
 		show_misc_checkbutton = gtk.CheckButton(_("Show 'quit' on menu"))
 		if get_show_quit() == True:
@@ -171,7 +209,7 @@ class PreferencesDialog():
 		else:
 			show_misc_checkbutton.set_active(False)
 		show_misc_checkbutton.connect("toggled", self.toggle_show_quit)
-		special_menuitems_box.pack_end(show_misc_checkbutton)
+		special_menuitems_box.pack_start(show_misc_checkbutton, expand=False)
 
 		menu_box.pack_end(special_menuitems_frame)
 		special_menuitems_frame.add(special_menuitems_box)
@@ -193,17 +231,25 @@ class PreferencesDialog():
 		else:
 			set_show_prefs(1)
 
+	def toggle_use_primary(self, event):
+		if get_use_primary() == True:
+			set_use_primary(0)
+			self.synch_primary_checkbutton.set_sensitive(False)
+		else:
+			set_use_primary(1)
+			self.synch_primary_checkbutton.set_sensitive(True)
+
+	def toggle_synch_primary(self, event):
+		if get_synch_primary() == True:
+			set_synch_primary(0)
+		else:
+			set_synch_primary(1)
+
 	def change_history_size(self, event):
 		set_history_size(int(self.hist_size_pref_spin.get_value()))
 
 	def change_item_length(self, event):
 		set_item_length(int(self.item_length_pref_spin.get_value()))
-
-	def keyboard_handler(self, event, data=None):
-		key = gtk.gdk.keyval_name(data.keyval)
-
-		if key == "Escape":
-			self.window.destroy()
 
 	def change_sel_dialog_key(self, entry):
 		if entry.get_text() != get_sel_dialog_key():
@@ -212,6 +258,13 @@ class PreferencesDialog():
 	def change_pref_dialog_key(self, entry):
 		if entry.get_text() != get_sel_dialog_key():
 			set_prefs_dialog_key(entry.get_text())
+	
+	def keyboard_handler(self, event, data=None):
+		key = gtk.gdk.keyval_name(data.keyval)
+
+		if key == "Escape":
+			self.window.destroy()
+
 
 if __name__ == "__main__":
 	import gettext

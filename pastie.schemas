@@ -25,6 +25,30 @@
       </locale>
     </schema>
     <schema>
+      <key>/schemas/apps/pastie/prefs/use_primary</key>
+      <applyto>/apps/pastie/prefs/use_primary</applyto>
+      <owner>pastie</owner>
+      <type>bool</type>
+      <default>false</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Use primary selection</short>
+        <long>Use primary selection.</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/pastie/prefs/synch_primary</key>
+      <applyto>/apps/pastie/prefs/use_primary</applyto>
+      <owner>pastie</owner>
+      <type>bool</type>
+      <default>true</default>
+      <gettext_domain>pastie</gettext_domain>
+      <locale name="C">
+        <short>Synch primary selection</short>
+        <long>Synchronize the primary selection into the clipboard.</long>
+      </locale>
+    </schema>
+    <schema>
       <key>/schemas/apps/pastie/prefs/show_quit_on_menu</key>
       <applyto>/apps/pastie/prefs/show_quit_on_menu</applyto>
       <owner>pastie</owner>

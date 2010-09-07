@@ -95,6 +95,11 @@ class TextHistoryMenuItem(HistoryMenuItem):
 		gtk.clipboard_get().set_text(self.payload)
 		gtk.clipboard_get().store()
 
+# the idea is to mark these entries differently in the future, if appindicator menues get Pango formatting
+class PrimaryHistoryMenuItem(TextHistoryMenuItem):
+	def set_as_current(self, event=None):
+		TextHistoryMenuItem.set_as_current(self, event)
+
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
 	def get_label(self):
