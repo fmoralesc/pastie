@@ -67,16 +67,15 @@ msgstr "גודל ההיסטוריה"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr ""
+msgstr "בחירה עיקרית"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr ""
+msgstr "שימוש בבחירה העיקרית"
 
 #: ../pastielib/preferences.py:131
-#, fuzzy
 msgid "Synchronize clipboards"
-msgstr "עריכת לוח הגזירים"
+msgstr "סנכרון לוחות הגזירים"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
