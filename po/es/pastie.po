@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Felipe Morales <hel.sheep@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
@@ -58,7 +58,7 @@ msgstr "Preferencias de pastie"
 
 #: ../pastielib/preferences.py:102
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../pastielib/preferences.py:106
 msgid "History size"
@@ -66,37 +66,35 @@ msgstr "Tamaño del historial"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr ""
+msgstr "Selección primaria"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr ""
+msgstr "Usar selección primaria"
 
 #: ../pastielib/preferences.py:131
-#, fuzzy
 msgid "Synchronize clipboards"
-msgstr "Editar el portapapeles"
+msgstr "Sincronizar los portapapales"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Combinaciones de teclas"
 
 #: ../pastielib/preferences.py:151
 msgid "Selection dialog"
-msgstr ""
+msgstr "Diálogo de selección"
 
 #: ../pastielib/preferences.py:161
-#, fuzzy
 msgid "Preferences dialog"
-msgstr "Preferencias"
+msgstr "Diálogo de las preferencias"
 
 #: ../pastielib/preferences.py:172
 msgid "Interface"
-msgstr ""
+msgstr "Interfaz"
 
 #: ../pastielib/preferences.py:174
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #: ../pastielib/preferences.py:183
 msgid "Menu history entries length"
@@ -104,7 +102,7 @@ msgstr "Largo de las entradas del menú"
 
 #: ../pastielib/preferences.py:194
 msgid "Special menu items"
-msgstr ""
+msgstr "Itemes especiales del menú"
 
 #: ../pastielib/preferences.py:198
 msgid "Show 'preferences' on menu"
