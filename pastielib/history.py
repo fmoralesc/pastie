@@ -97,8 +97,11 @@ class TextHistoryMenuItem(HistoryMenuItem):
 
 # the idea is to mark these entries differently in the future, if appindicator menues get Pango formatting
 class PrimaryHistoryMenuItem(TextHistoryMenuItem):
-	def set_as_current(self, event=None):
-		TextHistoryMenuItem.set_as_current(self, event)
+	pass
+
+# 
+class PasswordHistoryMenuItem(TextHistoryMenuItem):
+	pass
 
 # class representing file items
 class FileHistoryMenuItem(HistoryMenuItem):
