@@ -38,7 +38,7 @@
     </schema>
     <schema>
       <key>/schemas/apps/pastie/prefs/synch_primary</key>
-      <applyto>/apps/pastie/prefs/use_primary</applyto>
+      <applyto>/apps/pastie/prefs/synch_primary</applyto>
       <owner>pastie</owner>
       <type>bool</type>
       <default>true</default>
