@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Jiri Grönroos
 # This file is distributed under the same license as the Pastie package.
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 0.5.x\n"
@@ -57,7 +57,7 @@ msgstr "Pastien asetukset"
 
 #: ../pastielib/preferences.py:102
 msgid "General"
-msgstr ""
+msgstr "Yleiset"
 
 #: ../pastielib/preferences.py:106
 msgid "History size"
@@ -65,37 +65,35 @@ msgstr "Historian koko"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr ""
+msgstr "Ensisijainen valinta"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr ""
+msgstr "Käytä ensisijaista valintaa"
 
 #: ../pastielib/preferences.py:131
-#, fuzzy
 msgid "Synchronize clipboards"
-msgstr "Muokkaa leikepöytää"
+msgstr "Synkronoi leikepöydät"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #: ../pastielib/preferences.py:151
 msgid "Selection dialog"
-msgstr ""
+msgstr "Valintaikkuna"
 
 #: ../pastielib/preferences.py:161
-#, fuzzy
 msgid "Preferences dialog"
-msgstr "Asetukset"
+msgstr "Asetusikkuna"
 
 #: ../pastielib/preferences.py:172
 msgid "Interface"
-msgstr ""
+msgstr "Käyttöliittymä"
 
 #: ../pastielib/preferences.py:174
 msgid "Menu"
-msgstr ""
+msgstr "Valikko"
 
 #: ../pastielib/preferences.py:183
 msgid "Menu history entries length"
@@ -103,7 +101,7 @@ msgstr "Valikon historiakohteiden pituus"
 
 #: ../pastielib/preferences.py:194
 msgid "Special menu items"
-msgstr ""
+msgstr "Valikon erikoiskohteet"
 
 #: ../pastielib/preferences.py:198
 msgid "Show 'preferences' on menu"
