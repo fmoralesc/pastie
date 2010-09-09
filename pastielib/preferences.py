@@ -13,14 +13,17 @@ class PrefsGConfClient(object):
 	def notify_add(self, key, callback):
 		self.gconf_client.notify_add(GCONF_ROOT + '/' + key, callback)
 
-def get_pref(pref):
+def get_pref(pref, default):
 	value = gconf.client_get_default().get(GCONF_ROOT + "/" + pref)
-	if value.type.value_nick == 'int':
-		return value.get_int()
-	elif value.type.value_nick == 'bool':
-		return value.get_bool()
-	elif value.type.value_nick == 'string':
-		return value.get_string()
+	if value != None:
+		if value.type.value_nick == 'int':
+			return value.get_int()
+		elif value.type.value_nick == 'bool':
+			return value.get_bool()
+		elif value.type.value_nick == 'string':
+			return value.get_string()
+	else:
+		return default
 
 def set_pref(pref, value, value_type):
 	path = GCONF_ROOT + "/" + pref
@@ -32,37 +35,37 @@ def set_pref(pref, value, value_type):
 		gconf.client_get_default().set_string(path, value)
 
 def get_show_quit():
-	return get_pref('show_quit_on_menu')
+	return get_pref('show_quit_on_menu', False)
 
 def set_show_quit(value):
 	set_pref('show_quit_on_menu', value, 'bool')
 
 def get_show_prefs():
-	return get_pref('show_preferences_on_menu')
+	return get_pref('show_preferences_on_menu', False)
 
 def set_show_prefs(value):
 	set_pref('show_preferences_on_menu', value, 'bool')
 
 def get_history_size():
-	return get_pref('history_size')
+	return get_pref('history_size', 25)
 
 def set_history_size(value):
 	set_pref('history_size', value, 'int')
 
 def get_item_length():
-	return get_pref('item_length')
+	return get_pref('item_length', 60)
 
 def set_item_length(value):
 	set_pref('item_length', value, 'int')
 
 def get_prefs_dialog_key():
-	return get_pref('prefs_dialog_key')
+	return get_pref('prefs_dialog_key', "<Control><Alt>P") 
 
 def set_prefs_dialog_key(value):
 	set_pref('prefs_dialog_key', value, 'string')
 
 def get_sel_dialog_key():
-	return get_pref('sel_dialog_key')
+	return get_pref('sel_dialog_key', "<Control><Shift>C")
 
 def set_sel_dialog_key(value):
 	set_pref('sel_dialog_key', value, 'string')
