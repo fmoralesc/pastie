@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie 4.X\n"
@@ -65,16 +65,15 @@ msgstr "Größe des Verlaufs"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr ""
+msgstr "Primär Auswahl"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr ""
+msgstr "Verwende primär Auswahl"
 
 #: ../pastielib/preferences.py:131
-#, fuzzy
 msgid "Synchronize clipboards"
-msgstr "Zwischenablage bearbeiten"
+msgstr "Zwischenablagen abgleichen"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
