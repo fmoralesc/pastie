@@ -206,7 +206,11 @@ class ClipboardProtector(object):
 		elif self.clipboard.wait_is_text_available():
 			clipboard_tmp = self.clipboard.wait_for_text()
 			if clipboard_tmp not in ("", None):
-				if self.clipboard.wait_is_uris_available():
+				if 'PASS_TIMEOUT' in self.clipboard.wait_for_targets():
+					timeout = int(self.clipboard.wait_for_contents('PASS_TIMEOUT').data) * 1000
+					self.history.add(history.PasswordHistoryMenuItem(clipboard_tmp))
+					gobject.timeout_add(timeout, self.delete_current)
+				elif self.clipboard.wait_is_uris_available():
 					self.history.add(history.FileHistoryMenuItem(clipboard_tmp))
 				else:
 					self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
