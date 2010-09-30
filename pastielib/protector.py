@@ -45,9 +45,12 @@ class ClipboardProtector(object):
 		
 		# get the clipboard gdk atom
 		self.clipboard = gtk.clipboard_get(gtk.gdk.SELECTION_CLIPBOARD)
+		
+		self.primary = gtk.clipboard_get(gtk.gdk.SELECTION_PRIMARY)
 
 		# we use this to check if clipboard contents changed on special cases
-		self.clipboard_specials_text = ""
+		self.specials_text = ""
+		self.primary_text = ""
 
 		# create the history data strucure
 		self.history = history.HistoryMenuItemCollector()
@@ -73,11 +76,14 @@ class ClipboardProtector(object):
 		self.gconf_client.notify_add('show_preferences_on_menu', self.update_menu)
 		self.gconf_client.notify_add('item_length', self.update_menu)
 		self.gconf_client.notify_add('history_size', self.history.adjust_maxlen)
+		self.gconf_client.notify_add('use_primary', self.toggle_primary)
 		self.gconf_client.notify_add('sel_dialog_key', self.change_s_dialog_key)
 		self.gconf_client.notify_add('prefs_dialog_key', self.change_prefs_dialog_key)
 		
 		# check clipboard changes on owner-change event
 		self.clipboard.connect("owner-change", self.check)
+		self.toggle_primary()
+
 		# run an auxiloary loop for special cases (e.g., gvim)
 		gobject.timeout_add(500, self.check_specials)
 
@@ -89,6 +95,11 @@ class ClipboardProtector(object):
 		# set the preferences dialog's keyboard shortcut
 		self.prev_prefs_dialog_key = prefs.get_prefs_dialog_key()
 		self.change_prefs_dialog_key()
+
+	# activate/deactivate primary selection
+	def toggle_primary(self, a=None, b=None, c=None, d=None):
+		if prefs.get_use_primary() == True:
+			gobject.timeout_add(500, self.check_primary)
 
 	# change the binding of the selection dialog
 	def change_s_dialog_key(self, gconfclient=None, gconfentry=None, gconfvalue=None, d=None):
@@ -219,7 +230,7 @@ class ClipboardProtector(object):
 			clipboard_contents = self.clipboard.wait_for_image()
 			self.history.add(history.ImageHistoryMenuItem(clipboard_contents))
 			self.save_history()
-
+	
 	def check_specials(self):
 		targets = self.clipboard.wait_for_targets()
 		# if there are no targets, we simply return True
@@ -227,11 +238,30 @@ class ClipboardProtector(object):
 			# vim doesn't set the timestamp target, so we have to check for its changes.
 			if '_VIM_TEXT' in targets:
 				clipboard_tmp = self.clipboard.wait_for_text()
-				if clipboard_tmp not in ("", None) and clipboard_tmp != self.clipboard_specials_text:
+				if clipboard_tmp not in ("", None) and clipboard_tmp != self.specials_text:
 					self.history.add(history.TextHistoryMenuItem(clipboard_tmp))
-					self.clipboard_specials_text = clipboard_tmp
+					self.specials_text = clipboard_tmp
 					self.save_history()
 		return True
+
+	def check_primary(self):
+		if prefs.get_use_primary() == True:
+			mouse_modifiers = gtk.gdk.Display(None).get_pointer()[3].value_names
+			if 'GDK_BUTTON1_MASK' not in mouse_modifiers:
+				if 'GDK_SHIFT_MASK' not in mouse_modifiers:
+					primary_targets = self.primary.wait_for_targets()
+					if primary_targets != None:
+						primary_tmp = self.primary.wait_for_text()
+						if primary_tmp not in ("", None) and primary_tmp != self.primary_text:
+							self.history.add(history.PrimaryHistoryMenuItem(primary_tmp))
+							if prefs.get_synch_primary() == True:
+								gtk.clipboard_get().set_text(primary_tmp)
+								gtk.clipboard_get().store()
+							self.primary_specials_text = primary_tmp
+							self.save_history()
+			return True
+		else:
+			return False
 	
 	def create_edit_dialog(self, event):
 		edit_dialog = edit.ClipboardEditorDialog(self)

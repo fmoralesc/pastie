@@ -2,12 +2,12 @@
 # Copyright (C) 2010 Felipe Morales
 # This file is distributed under the same license as the Pastie package.
 # Marisol Barrios <marisol.barrios@gmail.com>, 2010.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-11 17:15-0400\n"
+"POT-Creation-Date: 2010-09-07 16:58-0400\n"
 "PO-Revision-Date: 2010-06-18 19:48-0300\n"
 "Last-Translator: Marisol Barrios <marisol.barrios@gmail.com>\n"
 "Language-Team: Japanese\n"
@@ -28,54 +28,95 @@ msgstr "置換する"
 msgid "R"
 msgstr "C"
 
-#: ../pastielib/protector.py:209
+#: ../pastielib/protector.py:280
 msgid "Edit clipboard"
 msgstr "クリップボード編集"
 
-#: ../pastielib/protector.py:214
+#: ../pastielib/protector.py:285
 msgid "Remove current"
 msgstr "現在のエントリーを取る"
 
-#: ../pastielib/protector.py:217
+#: ../pastielib/protector.py:288
 msgid "Clean history"
 msgstr "履歴消去"
 
-#: ../pastielib/protector.py:221
+#: ../pastielib/protector.py:292
 msgid "Nothing in history or clipboards"
 msgstr "歴史とクリップボードが空間"
 
-#: ../pastielib/protector.py:224
+#: ../pastielib/protector.py:296
 msgid "Preferences"
 msgstr "選択"
 
-#: ../pastielib/protector.py:228
+#: ../pastielib/protector.py:301
 msgid "Quit"
 msgstr "終了"
 
-#: ../pastielib/preferences.py:44
+#: ../pastielib/preferences.py:88
 msgid "Pastie preferences"
 msgstr "選択"
 
-#: ../pastielib/preferences.py:61
+#: ../pastielib/preferences.py:102
+msgid "General"
+msgstr ""
+
+#: ../pastielib/preferences.py:106
 msgid "History size"
 msgstr "歴史サイズ"
 
-#: ../pastielib/preferences.py:74
+#: ../pastielib/preferences.py:117
+msgid "Primary selection"
+msgstr ""
+
+#: ../pastielib/preferences.py:123
+msgid "Use primary selection"
+msgstr ""
+
+#: ../pastielib/preferences.py:131
+#, fuzzy
+msgid "Synchronize clipboards"
+msgstr "クリップボード編集"
+
+#: ../pastielib/preferences.py:143
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: ../pastielib/preferences.py:151
+msgid "Selection dialog"
+msgstr ""
+
+#: ../pastielib/preferences.py:161
+#, fuzzy
+msgid "Preferences dialog"
+msgstr "選択"
+
+#: ../pastielib/preferences.py:172
+msgid "Interface"
+msgstr ""
+
+#: ../pastielib/preferences.py:174
+msgid "Menu"
+msgstr ""
+
+#: ../pastielib/preferences.py:183
 msgid "Menu history entries length"
 msgstr "エントリ長さ"
 
-#: ../pastielib/preferences.py:87
-msgid "Misc"
-msgstr "その他"
+#: ../pastielib/preferences.py:194
+msgid "Special menu items"
+msgstr ""
 
-#: ../pastielib/preferences.py:91
+#: ../pastielib/preferences.py:198
 msgid "Show 'preferences' on menu"
 msgstr "メニューで「選択」を示す"
 
-#: ../pastielib/preferences.py:99
+#: ../pastielib/preferences.py:206
 msgid "Show 'quit' on menu"
 msgstr "メニューで「終了」を示す"
 
-#: ../pastielib/history.py:109
+#: ../pastielib/history.py:157
 msgid "more"
 msgstr "もっと"
+
+#~ msgid "Misc"
+#~ msgstr "その他"

@@ -4,3 +4,5 @@
 *.po~
 debian/
 /pastiec
+/.project
+/.pydevproject
