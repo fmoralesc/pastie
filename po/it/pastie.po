@@ -74,7 +74,7 @@ msgstr "Usa selezione primaria"
 
 #: ../pastielib/preferences.py:131
 msgid "Synchronize clipboards"
-msgstr "Modifica appunti"
+msgstr "Sincronizza appunti"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
