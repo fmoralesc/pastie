@@ -1,52 +1,52 @@
-# Japanese translations for Pastie package.
-# Copyright (C) 2010 Felipe Morales
-# This file is distributed under the same license as the Pastie package.
-# Marisol Barrios <marisol.barrios@gmail.com>, 2010.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-07 16:58-0400\n"
-"PO-Revision-Date: 2010-06-18 19:48-0300\n"
-"Last-Translator: Marisol Barrios <marisol.barrios@gmail.com>\n"
+"PO-Revision-Date: 2010-11-21 16:45+0900\n"
+"Last-Translator: Cahell Hide <cahells@gmail.com>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Japanese\n"
 
 #: ../pastielib/edit_clipboard.py:27
 msgid "Editing clipboard"
-msgstr "クリップボード編集中"
+msgstr "クリップボードの編集"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr "置換する"
+msgstr "置換する(_R)"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr "C"
+msgstr "R"
 
 #: ../pastielib/protector.py:280
 msgid "Edit clipboard"
-msgstr "クリップボード編集"
+msgstr "クリップボードを編集する"
 
 #: ../pastielib/protector.py:285
 msgid "Remove current"
-msgstr "現在のエントリーを取る"
+msgstr "現在の項目を削除する"
 
 #: ../pastielib/protector.py:288
 msgid "Clean history"
-msgstr "履歴消去"
+msgstr "履歴を消去する"
 
 #: ../pastielib/protector.py:292
 msgid "Nothing in history or clipboards"
-msgstr "歴史とクリップボードが空間"
+msgstr "クリップボードまたは履歴が皆無です"
 
 #: ../pastielib/protector.py:296
 msgid "Preferences"
-msgstr "選択"
+msgstr "設定"
 
 #: ../pastielib/protector.py:301
 msgid "Quit"
@@ -54,69 +54,65 @@ msgstr "終了"
 
 #: ../pastielib/preferences.py:88
 msgid "Pastie preferences"
-msgstr "選択"
+msgstr "Pastie の設定"
 
 #: ../pastielib/preferences.py:102
 msgid "General"
-msgstr ""
+msgstr "全般設定"
 
 #: ../pastielib/preferences.py:106
 msgid "History size"
-msgstr "歴史サイズ"
+msgstr "履歴のサイズ"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr ""
+msgstr "主要選択"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr ""
+msgstr "主要選択を使用する"
 
 #: ../pastielib/preferences.py:131
-#, fuzzy
 msgid "Synchronize clipboards"
-msgstr "クリップボード編集"
+msgstr "クリップボードを同期する"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "ショートカットキー"
 
 #: ../pastielib/preferences.py:151
 msgid "Selection dialog"
-msgstr ""
+msgstr "選択ダイアログ"
 
 #: ../pastielib/preferences.py:161
-#, fuzzy
 msgid "Preferences dialog"
-msgstr "選択"
+msgstr "設定ダイアログ"
 
 #: ../pastielib/preferences.py:172
 msgid "Interface"
-msgstr ""
+msgstr "インタフェース"
 
 #: ../pastielib/preferences.py:174
 msgid "Menu"
-msgstr ""
+msgstr "メニュー"
 
 #: ../pastielib/preferences.py:183
 msgid "Menu history entries length"
-msgstr "エントリ長さ"
+msgstr "メニューに登録される履歴の長さ"
 
 #: ../pastielib/preferences.py:194
 msgid "Special menu items"
-msgstr ""
+msgstr "スペシャルメニューアイテム"
 
 #: ../pastielib/preferences.py:198
 msgid "Show 'preferences' on menu"
-msgstr "メニューで「選択」を示す"
+msgstr "メニューに '設定' を表示する"
 
 #: ../pastielib/preferences.py:206
 msgid "Show 'quit' on menu"
-msgstr "メニューで「終了」を示す"
+msgstr "メニューに  '終了' を表示する"
 
 #: ../pastielib/history.py:157
 msgid "more"
-msgstr "もっと"
+msgstr "さらに"
 
-#~ msgid "Misc"
-#~ msgstr "その他"
