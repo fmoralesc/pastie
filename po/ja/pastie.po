@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Pastie Japanese translation.
+# Copyright (C) 2010  Felipe Morales <hel.sheep@gmail.com>.
+# This file is distributed under the same license as the Pastie package.
+# Marisol Barrios <marisol.barrios@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-07 16:58-0400\n"
-"PO-Revision-Date: 2010-11-21 16:45+0900\n"
+"PO-Revision-Date: 2010-11-24 10:58+0900\n"
 "Last-Translator: Cahell Hide <cahells@gmail.com>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
@@ -66,11 +66,11 @@ msgstr "履歴のサイズ"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr "主要選択"
+msgstr "プライマリセレクション"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr "主要選択を使用する"
+msgstr "プライマリセレクションを使用する"
 
 #: ../pastielib/preferences.py:131
 msgid "Synchronize clipboards"
