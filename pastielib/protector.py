@@ -37,9 +37,9 @@ class ClipboardProtector(object):
 		pastieDir = os.path.join(os.path.expanduser('~'), '.pastie/')
 		pastieIcon = os.path.expanduser('~/.pastie/pastie.svg')
 		if os.path.isfile(pastieIcon) == True:
-			self.indicator = appindicator.Indicator("pastie", "pastie", appindicator.CATEGORY_APPLICATION_STATUS, pastieDir)
+			self.indicator = appindicator.Indicator("pastie", "pastie", appindicator.CATEGORY_OTHER, pastieDir)
 		else:
-			self.indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_APPLICATION_STATUS)
+			self.indicator = appindicator.Indicator("pastie", "gtk-paste", appindicator.CATEGORY_OTHER)
 		# set the indicator as active (pastie must be always shown)
 		self.indicator.set_status(appindicator.STATUS_ACTIVE)
 		
