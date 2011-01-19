@@ -19,10 +19,50 @@
 import sys
 import getopt
 import gettext
+import os
+import os.path
+import shutil
+
+import glib
 import gtk
 
 import pastielib.cli as cli
 import pastielib.protector as protector
+
+def migrate_data_to_xdg_dirs():
+	# migrate history
+	old_history_file = os.path.expanduser('~/.clipboard_history')
+	pastie_data_dir = os.path.join(glib.get_user_data_dir(), 'pastie/')
+	history_file = os.path.join(pastie_data_dir, 'clipboard_history')
+	
+	if os.path.isdir(pastie_data_dir):
+		# XDG data dir already exists
+		return
+
+	if not os.path.isfile(old_history_file):
+		# old history file didn't exists, but the directory so the history file
+		# can be created
+		os.mkdir(pastie_data_dir)
+		return
+
+	os.mkdir(pastie_data_dir)
+	shutil.copy2(old_history_file, history_file)
+
+def migrate_config_to_xdg_dirs():
+	# migrate icon
+	pastie_config_dir = os.path.join(glib.get_user_config_dir(), 'pastie/')
+	old_pastie_dir = os.path.expanduser('~/.pastie/')
+	
+	# check if XDG dirs already exists
+	if os.path.isdir(pastie_config_dir):
+		return
+	
+	if not os.path.isdir(old_pastie_dir):
+		# old pastie dir didn't exists
+		return
+	
+	shutil.copytree(old_pastie_dir, pastie_config_dir)
+
 
 if __name__ == "__main__":
 	try:
@@ -37,6 +77,9 @@ if __name__ == "__main__":
 			sys.exit()
 		else:
 			assert False, "unhandled option"
+	
+	migrate_data_to_xdg_dirs()
+	migrate_config_to_xdg_dirs()
 	
 	# if we pipe the output of another program to pastie, it sets it as the current clipboard
 	if not sys.stdin.isatty():

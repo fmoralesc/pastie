@@ -14,12 +14,14 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import glib
 import gobject
 import gtk
 import gtk.gdk
 
 import appindicator
 import keybinder
+import os
 import os.path
 import xml.etree.ElementTree as tree
 from xml.parsers.expat import ExpatError
@@ -32,6 +34,13 @@ import pastielib.preferences as prefs
 import pastielib.selection_dialog as seldiag
 
 class ClipboardProtector(object):
+    
+	PASTIE_DATA_DIR = os.path.join(glib.get_user_data_dir(), 'pastie/')
+	HISTORY_FILE = os.path.join(PASTIE_DATA_DIR, 'clipboard_history')
+	
+	PASTIE_CONFIG_DIR = os.path.join(glib.get_user_config_dir(), 'pastie/')
+	PASTIE_ICON = os.path.join(PASTIE_CONFIG_DIR, 'pastie.svg')
+    
 	def __init__(self):
 		# try to load custom icon from ~/.pastie/
 		pastieDir = os.path.join(os.path.expanduser('~'), '.pastie/')
@@ -122,11 +131,11 @@ class ClipboardProtector(object):
 		self.prev_prefs_dialog_key = prefs.get_prefs_dialog_key()
 
 	# returns a list of history items from a XML file.
-	def recover_history(self, input_file="~/.clipboard_history"):
+	def recover_history(self, input_file=HISTORY_FILE):
 		tmp_list = []
 
 		try:
-			history_tree = tree.parse(os.path.expanduser(input_file))
+			history_tree = tree.parse(input_file)
 		except IOError: # file doesn't exist
 			return tmp_list
 		except ExpatError: # file is empty or malformed
@@ -154,7 +163,7 @@ class ClipboardProtector(object):
 		return tmp_list
 	
 	# saves the clipboard history to a XML file. called on program termination.
-	def save_history(self, output_file="~/.clipboard_history"):
+	def save_history(self, output_file=HISTORY_FILE):
 		history_tree_root = tree.Element("clipboard")
 		
 		for item in self.history.data:
@@ -182,7 +191,7 @@ class ClipboardProtector(object):
 				history_tree_item.text = item.payload
 
 		history_tree = tree.ElementTree(history_tree_root)
-		history_tree.write(os.path.expanduser(output_file), "UTF-8")
+		history_tree.write(output_file, "UTF-8")
 
 	# erase the clipboard history. the current contents of the clipoard will remain.
 	def clean_history(self, event=None):
