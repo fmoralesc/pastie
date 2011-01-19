@@ -1,119 +1,117 @@
-# Finnish translation for Pastie.
-# Copyright (C) 2010 Jiri Grönroos
-# This file is distributed under the same license as the Pastie package.
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2010.
-# 
+# Pastie galician translation
+# Copyright (C) 2010 Felipe Morales
+# This file is distributed under the same license as the pastie package.
+# Manuel X.Lemos <mxlemos@gmail.com>, 2010.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Pastie 0.5.x\n"
+"Project-Id-Version: Pastie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-07 16:58-0400\n"
-"PO-Revision-Date: 2010-07-25 12:22+0200\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish\n"
+"PO-Revision-Date: 2010-09-27 20:14+0100\n"
+"Last-Translator: Manuel X. Lemos <mxlemos@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../pastielib/edit_clipboard.py:27
 msgid "Editing clipboard"
-msgstr "Leikepöydän muokkaus"
+msgstr "A editar o portarretallos"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "_Replace"
-msgstr "_Korvaa"
+msgstr "_Substituír"
 
 #: ../pastielib/edit_clipboard.py:57
 msgid "R"
-msgstr "K"
+msgstr "S"
 
 #: ../pastielib/protector.py:280
 msgid "Edit clipboard"
-msgstr "Muokkaa leikepöytää"
+msgstr "Editar o portarretallos"
 
 #: ../pastielib/protector.py:285
 msgid "Remove current"
-msgstr "Poista nykyinen"
+msgstr "Eliminar a entrada activa"
 
 #: ../pastielib/protector.py:288
 msgid "Clean history"
-msgstr "Tyhjennä historia"
+msgstr "Limpar o historial"
 
 #: ../pastielib/protector.py:292
 msgid "Nothing in history or clipboards"
-msgstr "Historia ja leikepöytä ovat tyhjiä"
+msgstr "Non hai nada no historial ou no portarretallos"
 
 #: ../pastielib/protector.py:296
 msgid "Preferences"
-msgstr "Asetukset"
+msgstr "Preferencias"
 
 #: ../pastielib/protector.py:301
 msgid "Quit"
-msgstr "Lopeta"
+msgstr "Saír"
 
 #: ../pastielib/preferences.py:88
 msgid "Pastie preferences"
-msgstr "Pastien asetukset"
+msgstr "Preferencias de Pastie"
 
 #: ../pastielib/preferences.py:102
 msgid "General"
-msgstr "Yleiset"
+msgstr "Xeral"
 
 #: ../pastielib/preferences.py:106
 msgid "History size"
-msgstr "Historian koko"
+msgstr "Tamaño do historial"
 
 #: ../pastielib/preferences.py:117
 msgid "Primary selection"
-msgstr "Ensisijainen valinta"
+msgstr "Selección primaria"
 
 #: ../pastielib/preferences.py:123
 msgid "Use primary selection"
-msgstr "Käytä ensisijaista valintaa"
+msgstr "Usar selección primaria"
 
 #: ../pastielib/preferences.py:131
 msgid "Synchronize clipboards"
-msgstr "Synkronoi leikepöydät"
+msgstr "Sincronizar portarretallos"
 
 #: ../pastielib/preferences.py:143
 msgid "Keyboard shortcuts"
-msgstr "Pikanäppäimet"
+msgstr "Atallos de teclado"
 
 #: ../pastielib/preferences.py:151
 msgid "Selection dialog"
-msgstr "Valintaikkuna"
+msgstr "Diálogo de selección"
 
 #: ../pastielib/preferences.py:161
 msgid "Preferences dialog"
-msgstr "Asetusikkuna"
+msgstr "Diálogo de preferencias"
 
 #: ../pastielib/preferences.py:172
 msgid "Interface"
-msgstr "Käyttöliittymä"
+msgstr "Interface"
 
 #: ../pastielib/preferences.py:174
 msgid "Menu"
-msgstr "Valikko"
+msgstr "Menú"
 
 #: ../pastielib/preferences.py:183
 msgid "Menu history entries length"
-msgstr "Valikon historiakohteiden pituus"
+msgstr "Lonxitude das entradas do menú"
 
 #: ../pastielib/preferences.py:194
 msgid "Special menu items"
-msgstr "Valikon erikoiskohteet"
+msgstr "Elementos especiais do menú"
 
 #: ../pastielib/preferences.py:198
 msgid "Show 'preferences' on menu"
-msgstr "Näytä Asetukset-kohta valikossa"
+msgstr "Mostrar 'preferencias' no menú"
 
 #: ../pastielib/preferences.py:206
 msgid "Show 'quit' on menu"
-msgstr "Näytä Lopeta-toiminto valikossa"
+msgstr "Mostrar 'saír' no menú"
 
 #: ../pastielib/history.py:157
 msgid "more"
-msgstr "lisää"
+msgstr "máis"
 
-#~ msgid "Misc"
-#~ msgstr "Muut"
