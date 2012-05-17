@@ -17,7 +17,7 @@
 import gobject
 import gtk
 import gtk.gdk
-import gnomevfs
+import gio
 import os.path
 from fractions import Fraction
 
@@ -206,8 +206,8 @@ class FileHistoryMenuItem(HistoryMenuItem):
 			files = path.split("\n")
 			file_paths = []
 			for copied_file in files:
-				file_path = gnomevfs.escape_path_string(copied_file)
-				file_paths.append('file://' + file_path)
+				gfile = gio.File(copied_file)
+				file_paths.append(gfile.get_uri())
 			selectiondata.set_uris(file_paths)
 			selectiondata.set('x-special/gnome-copied-files', 8, 'copy\n' + '\n'.join(file_paths))
 
