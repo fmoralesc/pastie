@@ -24,6 +24,7 @@ import keybinder
 import os
 import os.path
 import xml.etree.ElementTree as tree
+from xml.etree.ElementTree import ParseError as ParseError
 from xml.parsers.expat import ExpatError
 import base64
 import hashlib
@@ -139,6 +140,8 @@ class ClipboardProtector(object):
 		except IOError: # file doesn't exist
 			return tmp_list
 		except ExpatError: # file is empty or malformed
+			return tmp_list
+		except ParseError: # file is empty (not element found)
 			return tmp_list
 		
 		for item in history_tree.findall("item"):
